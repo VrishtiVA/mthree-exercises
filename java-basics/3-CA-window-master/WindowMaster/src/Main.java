@@ -32,6 +32,8 @@ public class Main {
         //Desired inputs
         String stringHeight;
         String stringWidth;
+        String stringGlassCost;
+        String stringTrimCost;
 
         //Desired outputs
         float area;
@@ -41,24 +43,28 @@ public class Main {
         //Declare and initialize useful scanner object
         Scanner scanner = new Scanner(System.in);
 
-        //Demand height of window from user
+        //Demand user inputs
         System.out.println("What is the height of your window? (in feet): ");
         stringHeight = scanner.nextLine();
-
-        //Demand width of window from user
         System.out.println("What is the width of your window? (in feet): ");
         stringWidth = scanner.nextLine();
+        System.out.println("What is the glass cost per square foot?: ");
+        stringGlassCost = scanner.nextLine();
+        System.out.println("What is the trim cost per linear foot?: ");
+        stringTrimCost = scanner.nextLine();
 
         //Parse height and width provided
         float height = Float.parseFloat(stringHeight);
         float width = Float.parseFloat(stringWidth);
+        float glassCost = Float.parseFloat(stringGlassCost);
+        float trimCost = Float.parseFloat(stringTrimCost);
 
         //Calculate area and perimeter
         area = height * width;
         perimeter = 2 * (height + width); //(2h+2w) = 2(h+w)
 
         //Calculate total cost of window, and round to 2dp.
-        cost = (area * 3.5f) + (perimeter * 2.25f);
+        cost = (area * glassCost) + (perimeter * trimCost);
         cost = Math.round(cost * 100)/100f;
 
         //Output nice summary
