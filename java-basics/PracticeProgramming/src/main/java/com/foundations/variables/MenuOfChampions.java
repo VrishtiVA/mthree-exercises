@@ -38,9 +38,15 @@ public class MenuOfChampions {
         );
 
         //Display Menu
-        System.out.printf("$%f.2\t %s\n", price1, item1);
-        System.out.printf("$%f.2\t %s\n", price2, item2);
-        System.out.printf("$%f.2\t %s\n", price3, item3);
+        System.out.printf("\t\t\t\t\t$ %-20.2f %-10s\n", price1, item1);
+        System.out.printf("\t\t\t\t\t$ %-20.2f %-10s\n", price2, item2);
+        System.out.printf("\t\t\t\t\t$ %-20.2f %-10s\n", price3, item3);
+
+        /* Formatting Notes:
+            +ve num = right align
+            -ve num = left align
+            num = no.spaces for item
+        */
 
     }
 }
