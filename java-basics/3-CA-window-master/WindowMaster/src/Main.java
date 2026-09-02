@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Main {
     /**
      * Aim: Calculate total cost for home replacement windows.
-     * Window Master Plan/Thoughts:
+     * Pre-Refactor Plan: Window Master Plan/Thoughts:
      * 1. Ask for height and width
      *      Need Scanner for user input and parsing.
      *      String and float variables for each needed.
@@ -22,19 +22,16 @@ public class Main {
      *      Cut glass will look weird, think minecraft it needs to be custom.
      *      So lets price based on sand and just do maths.
      *
-     * Note:
-     * I'm lazy to exception handle at the moment but will do that later on when higher stake.
-     *
      * @param args
      */
     public static void main(String[] args) {
 
         //Desired inputs
-        String stringHeight;
-        String stringWidth;
-        String stringGlassCost;
-        String stringTrimCost;
-        String stringQuantity;
+        int quantity;
+        float height;
+        float width;
+        float glassCost;
+        float trimCost;
 
         //Desired outputs
         float area;
@@ -44,24 +41,12 @@ public class Main {
         //Declare and initialize useful scanner object
         Scanner scanner = new Scanner(System.in);
 
-        //Demand user inputs
-        System.out.println("How many windows do you need?: ");
-        stringQuantity = scanner.nextLine();
-        System.out.println("What is the height of your window? (in feet): ");
-        stringHeight = scanner.nextLine();
-        System.out.println("What is the width of your window? (in feet): ");
-        stringWidth = scanner.nextLine();
-        System.out.println("What is the glass cost per square foot?: ");
-        stringGlassCost = scanner.nextLine();
-        System.out.println("What is the trim cost per linear foot?: ");
-        stringTrimCost = scanner.nextLine();
-
-        //Parse height and width provided
-        float height = Float.parseFloat(stringHeight);
-        float width = Float.parseFloat(stringWidth);
-        float glassCost = Float.parseFloat(stringGlassCost);
-        float trimCost = Float.parseFloat(stringTrimCost);
-        int quantity = Integer.parseInt(stringQuantity);
+        //Demand and parse user inputs.
+        quantity = validInt(scanner, "How many windows do you need?: ");
+        height = validFloat(scanner, "What is the height of your window? (in feet): ");
+        width = validFloat(scanner, "What is the width of your window? (in feet):");
+        glassCost = validFloat(scanner, "What is the glass cost per square foot?: ");
+        trimCost = validFloat(scanner, "What is the trim cost per linear foot?: ");
 
         //Calculate area and perimeter
         area = height * width;
@@ -81,5 +66,84 @@ public class Main {
             "\n-----------------------------"
         );
 
+        //Close scanner to tidy up.
+        scanner.close();
+
+    }
+
+    /**
+     * Method to ask question to obtain a valid float.
+     * Using exception handling.
+     * @param question The relevant question to ask for obtaining the float.
+     * @return A valid float.
+     */
+    private static float validFloat(Scanner scanner, String question) {
+
+        boolean isValid = false;
+        float result = 0f;
+
+        //Ask question at least once until valid response.
+        do {
+            //Ask relevant question
+            System.out.println(question);
+
+            try {
+                //Try take input and parse
+                result = Float.parseFloat(scanner.nextLine());
+
+                //Ensure number is positive (example restriction)
+                if (result < 0) {
+                    throw new NumberFormatException();
+                }
+
+                //If reached here, must be valid
+                isValid = true;
+
+            } catch (NumberFormatException ex) {
+                //If failed somewhere along the way, it is invalid so retry.
+                System.out.println("Invalid input, please try again.");
+            }
+
+        } while (!isValid);
+
+        return result;
+    }
+
+    /**
+     * Method to ask question to obtain a valid int.
+     * Using exception handling.
+     * @param question The relevant question to ask for obtaining the int.
+     * @return A valid int.
+     */
+    private static int validInt(Scanner scanner, String question) {
+
+        boolean isValid = false;
+        int result = 0;
+
+        //Ask question at least once until valid response.
+        do {
+            //Ask relevant question
+            System.out.println(question);
+
+            try {
+                //Try take input and parse
+                result = Integer.parseInt(scanner.nextLine());
+
+                //Ensure number is positive (example restriction)
+                if (result < 0) {
+                    throw new NumberFormatException();
+                }
+
+                //If reached here, must be valid
+                isValid = true;
+
+            } catch (NumberFormatException ex) {
+                //If failed somewhere along the way, it is invalid so retry.
+                System.out.println("Invalid input, please try again.");
+            }
+
+        } while (!isValid);
+
+        return result;
     }
 }
