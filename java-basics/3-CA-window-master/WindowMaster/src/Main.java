@@ -34,6 +34,7 @@ public class Main {
         String stringWidth;
         String stringGlassCost;
         String stringTrimCost;
+        String stringQuantity;
 
         //Desired outputs
         float area;
@@ -44,6 +45,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         //Demand user inputs
+        System.out.println("How many windows do you need?: ");
+        stringQuantity = scanner.nextLine();
         System.out.println("What is the height of your window? (in feet): ");
         stringHeight = scanner.nextLine();
         System.out.println("What is the width of your window? (in feet): ");
@@ -58,20 +61,24 @@ public class Main {
         float width = Float.parseFloat(stringWidth);
         float glassCost = Float.parseFloat(stringGlassCost);
         float trimCost = Float.parseFloat(stringTrimCost);
+        int quantity = Integer.parseInt(stringQuantity);
 
         //Calculate area and perimeter
         area = height * width;
         perimeter = 2 * (height + width); //(2h+2w) = 2(h+w)
 
-        //Calculate total cost of window, and round to 2dp.
-        cost = (area * glassCost) + (perimeter * trimCost);
+        //Calculate total cost of all windows, and round to 2dp.
+        cost = ((area * glassCost) + (perimeter * trimCost)) * quantity;
         cost = Math.round(cost * 100)/100f;
 
         //Output nice summary
         System.out.println(
-            "\nArea: " + area +
-            "\nPerimeter: " + perimeter +
-            "\nTotal Cost: $" + cost
+            "\n---------- Results ----------" +
+            "\nQuantity: " + quantity +
+            "\nArea per Window: " + area +
+            "\nPerimeter per Window: " + perimeter +
+            "\nTotal Cost: $" + cost +
+            "\n-----------------------------"
         );
 
     }
