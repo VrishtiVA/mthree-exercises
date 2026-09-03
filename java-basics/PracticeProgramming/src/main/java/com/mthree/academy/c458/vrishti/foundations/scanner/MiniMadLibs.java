@@ -9,7 +9,7 @@ public class MiniMadLibs {
      * Say making a method to collect user input, what's best.
      * - Pass scanner object in, potentially higher coupling.
      * - Create scanner object there, memory inconvenience when they could just use same scanner.
-     * - Create constant: final static scanner object and sit lazily.
+     * - Create constant: final static scanner object and sit lazily -> scanner wouldn't be released when not used.
      */
     final static Scanner inputReader = new Scanner(System.in);
 
