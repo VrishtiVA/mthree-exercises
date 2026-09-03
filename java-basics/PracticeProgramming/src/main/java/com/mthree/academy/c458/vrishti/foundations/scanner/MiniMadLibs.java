@@ -3,9 +3,19 @@ package com.mthree.academy.c458.vrishti.foundations.scanner;
 import java.util.Scanner;
 
 public class MiniMadLibs {
+
+    /**
+     * Thoughts about trade-offs in where this object is created:
+     * Say making a method to collect user input, what's best.
+     * - Pass scanner object in, potentially higher coupling.
+     * - Create scanner object there, memory inconvenience when they could just use same scanner.
+     * - Create constant: final static scanner object and sit lazily.
+     */
+    final static Scanner inputReader = new Scanner(System.in);
+
     public static void main(String[] args) {
 
-        Scanner inputReader = new Scanner(System.in);
+//        Scanner inputReader = new Scanner(System.in);
 
         //Desired inputs
         String _1, _2, _3, _4, _5, _6, _7, _8, _9, _10;
