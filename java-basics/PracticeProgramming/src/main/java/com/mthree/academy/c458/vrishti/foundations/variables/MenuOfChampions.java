@@ -1,4 +1,4 @@
-package com.foundations.variables;
+package com.mthree.academy.c458.vrishti.foundations.variables;
 
 public class MenuOfChampions {
     public static void main(String[] args) {

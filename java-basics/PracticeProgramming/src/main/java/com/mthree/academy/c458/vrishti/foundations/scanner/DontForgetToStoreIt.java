@@ -1,4 +1,4 @@
-package com.foundations.scanner;
+package com.mthree.academy.c458.vrishti.foundations.scanner;
 
 import java.util.Scanner;
 

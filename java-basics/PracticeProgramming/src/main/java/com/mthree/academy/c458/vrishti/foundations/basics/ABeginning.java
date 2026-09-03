@@ -1,4 +1,4 @@
-package com.foundations.basics;
+package com.mthree.academy.c458.vrishti.foundations.basics;
 
 public class ABeginning {
     public static void main(String[] args) {
