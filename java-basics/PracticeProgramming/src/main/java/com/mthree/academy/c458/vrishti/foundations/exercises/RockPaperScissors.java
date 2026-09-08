@@ -8,9 +8,12 @@ public class RockPaperScissors {
 
     public static void main(String[] args) {
 
+        //Constants
+        String[] CHOICES = new String[]{"Rock", "Paper", "Scissors"};
+
+        //Utility objects
         Scanner inputReader = new Scanner(System.in);
         Random randomGenerator = new Random();
-        String[] CHOICES = new String[]{"Rock", "Paper", "Scissors"};
 
         //Desired inputs
         int rounds;
@@ -45,7 +48,7 @@ public class RockPaperScissors {
                 System.out.printf("I picked %s. ", CHOICES[computerChoice]);
 
                 //Evaluate result from choices, passing both in 0-index form
-                roundResult = evaluateRockPaperScissors(userChoice - 1, computerChoice);
+                roundResult = evaluateRoundResult(userChoice - 1, computerChoice);
 
                 //Track result
                 switch (roundResult) {
@@ -95,34 +98,35 @@ public class RockPaperScissors {
 
         } while (true);
 
+        inputReader.close();
         System.out.println("The End.");
     }
 
     /**
-     * A method to evaluate user result in rock paper scissors.
+     * A method to evaluate the users result in a round of rock paper scissors.
      * Parameters are 0-indexed in this method (Rock = 0, Paper = 1, Scissors = 2).
      * <br/>
      *
      * The way it works is,
      * <ul>
-     *     <li> if same choice -> tie, </li>
-     *     <li> if the users choice was 1 higher than the computers choice -> the user wins, </li>
-     *     <li> if the users choice was 1 lower than the computers choice -> the computer wins, </li>
+     *     <li> If players made the same choice -> tie, </li>
+     *     <li> If the users choice was 1 higher than the computers choice -> the user wins, </li>
+     *     <li> If the users choice was 1 lower than the computers choice -> the computer wins, </li>
      * </ul>
      * <br/>
      *
-     * Modulus is used to allow this, cyclically in universe 3 (0 to 2). e.g.
+     * Modulus is used to support this implementation, cyclically in universe 3 (0 to 2). e.g.
      * <ul>
-     *  <li> if computer picked R/0, and user picked one greater P/1, user wins, otherwise computer wins. </li>
-     *  <li> if computer picked P/1, and user picked one greater S/2, user wins, otherwise computer wins. </li>
-     *  <li> if computer picked S/2, and user picked one greater (2+1 = 3, 3%3 = 0) R/0, user wins, otherwise computer wins. </li>
+     *  <li> If computer picked R/0, and user picked one greater P/1, user wins, otherwise computer wins. </li>
+     *  <li> If computer picked P/1, and user picked one greater S/2, user wins, otherwise computer wins. </li>
+     *  <li> If computer picked S/2, and user picked one greater (2+1 = 3, 3%3 = 0) R/0, user wins, otherwise computer wins. </li>
      * </ul>
      *
-     * @param userChoice users choice as a 0-indexed integer.
-     * @param computerChoice computers choice as a 0-indexed integer.
+     * @param userChoice Users choice as a 0-indexed integer.
+     * @param computerChoice Computers choice as a 0-indexed integer.
      * @return 1 if user wins, 0 if a tie, -1 if user losses.
      */
-    private static int evaluateRockPaperScissors(int userChoice, int computerChoice) {
+    private static int evaluateRoundResult(int userChoice, int computerChoice) {
 
         if (userChoice == computerChoice) {
             return 0; //Tie
@@ -141,7 +145,7 @@ public class RockPaperScissors {
      * @param question The question to ask for this input.
      * @param lowerBound The inclusive lower bound.
      * @param upperBound The inclusive upper bound.
-     * @param checkRangeQuitEarly If indicated as true, method will return -1 if first try is out of range.
+     * @param checkRangeQuitEarly If indicated as true, method will return -1 for the first try that is out of range.
      * @return A valid integer
      */
     private static int takeValidIntInput(Scanner inputReader, String question, int lowerBound, int upperBound, boolean checkRangeQuitEarly) {
@@ -152,7 +156,7 @@ public class RockPaperScissors {
         //Repeatedly ask until valid input is provided.
         do {
             try {
-                //Take user input
+                //Take input from the user for the question
                 System.out.print(question + ": ");
                 number = inputReader.nextInt();
 
@@ -163,7 +167,7 @@ public class RockPaperScissors {
                         System.out.printf("Your input: %d, was out of range.\n", number);
                         return -1;
                     } else {
-                        System.out.printf("Invalid input. The number should be in range %d <= x <= %d\n", lowerBound, upperBound);
+                        System.out.printf("Invalid input. The number should be in range %d <= x <= %d.\n", lowerBound, upperBound);
                         continue; //Try again
                     }
                 }
@@ -172,7 +176,7 @@ public class RockPaperScissors {
                 return number;
 
             } catch (InputMismatchException ex) { //Using the exception thrown by scanner nextInt()
-                System.out.printf("Invalid input. The input should be a number in range %d <= x < %d\n", lowerBound, upperBound);
+                System.out.printf("Invalid input. The input should be a number in range %d <= x < %d.\n", lowerBound, upperBound);
             } finally {
                 //Ensuring full line was read so can move on, preventing issues in subsequent reads.
                 inputReader.nextLine();
