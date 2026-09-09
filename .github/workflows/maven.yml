@@ -12,11 +12,11 @@ on:
   push:
     branches: [ "main" ]
     paths: 
-    - 'mandatory-assignment/1-factorial-calculator/**'
+    - 'mandatory-assignments/1-factorial-calculator/**'
   pull_request:
     branches: [ "main" ]
     paths: 
-    - 'mandatory-assignment/1-factorial-calculator/**'
+    - 'mandatory-assignments/1-factorial-calculator/**'
 
 jobs:
   build:
