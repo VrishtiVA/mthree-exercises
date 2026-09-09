@@ -21,15 +21,19 @@ public class App {
             }
         };
 
-        Shape shape2 = new Circle("Green", 5);
+        //Defaulted color to null, lets change and see.
+        shape.setColor("Blue");
+        System.out.printf("Colour of anonymous shape: %s\n", shape.color);
 
-        //shape2.color also works here,
+        Shape circle = new Circle("Green", 5);
+
+        //circle.color also works here,
         //since protected gives package access too.
         System.out.println(
             "\n===== Circle =====" +
-            "\nColour: " + shape2.getColor() +
-            "\nArea: " + shape2.getArea() +
-            "\nPerimeter: " + shape2.getPerimeter() +
+            "\nColour: " + circle.getColor() +
+            "\nArea: " + circle.getArea() +
+            "\nPerimeter: " + circle.getPerimeter() +
             "\n=================="
         );
 
