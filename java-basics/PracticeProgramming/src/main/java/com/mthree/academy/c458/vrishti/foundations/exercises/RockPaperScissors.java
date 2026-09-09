@@ -1,10 +1,10 @@
 package com.mthree.academy.c458.vrishti.foundations.exercises;
 
-import java.util.InputMismatchException;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class RockPaperScissors {
+
+
 
     public static void main(String[] args) {
 
@@ -17,6 +17,7 @@ public class RockPaperScissors {
 
         //Desired inputs
         int rounds;
+        int userChoice;
 
         //Tracking variables
         int wins = 0;
@@ -24,12 +25,12 @@ public class RockPaperScissors {
         int losses = 0;
 
         //Utility variables
-        int userChoice;
         int computerChoice;
         int roundResult;
         String overallWinner;
 
-        //Play loop, using do-while to attempt play at least once.
+        //Play loop, using do-while to attempt to play at least once.
+        System.out.println();
         do {
 
             //Ask for number of rounds to play
@@ -40,6 +41,8 @@ public class RockPaperScissors {
             if (rounds == -1) break;
 
             //Play number of rounds
+            System.out.println("=============== PLAYING ROUND ===============");
+            System.out.println();
             for (int i = 0; i < rounds; i++) {
 
                 //User and computer choice
@@ -65,7 +68,11 @@ public class RockPaperScissors {
                         wins++;
                         break;
                 }
+
+                System.out.println();
             }
+            System.out.println("============== END OF ROUND ===============");
+            System.out.println();
 
             //Calculate overall result
             if (wins == losses) {
@@ -75,8 +82,6 @@ public class RockPaperScissors {
             }
 
             //Output results
-            System.out.println("That was the end of the round.");
-            System.out.println();
             System.out.println(
                 "Here are your results: " +
                 "\nWINS: " + wins +
