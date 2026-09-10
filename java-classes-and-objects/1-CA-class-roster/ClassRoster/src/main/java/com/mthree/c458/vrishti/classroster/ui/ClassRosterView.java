@@ -121,4 +121,12 @@ public class ClassRosterView {
         io.readString("Please hit enter to continue.");
     }
 
+    public void displayExistBanner() {
+        io.print("GOOD BYE");
+    }
+
+    public void displayUnknownCommandBanner() {
+        io.print("UNKNOWN COMMAND");
+    }
+
 }

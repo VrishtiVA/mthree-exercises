@@ -15,7 +15,6 @@ import java.util.List;
 public class ClassRosterController {
 
     private ClassRosterView view = new ClassRosterView();
-    private UserIO io = new UserIOConsoleImpl();
     private ClassRosterDao dao = new ClassRosterDaoFileImpl();
 
     /**
@@ -48,12 +47,12 @@ public class ClassRosterController {
                     keepGoing = false;
                     break;
                 default:
-                    io.print("UNKNOWN COMMAND");
+                    unknownCommand();
             }
 
         } while (keepGoing);
 
-        io.print("GOOD BYE");
+        exitMessage();
 
     }
 
@@ -97,6 +96,14 @@ public class ClassRosterController {
         Student removedStudent = dao.removeStudent(studentId);
         //Check if was removed, by knowing if above returned a student.
         view.displayRemoveResult(removedStudent);
+    }
+
+    private void unknownCommand() {
+        view.displayUnknownCommandBanner();
+    }
+
+    private void exitMessage() {
+        view.displayExistBanner();
     }
 
 }
