@@ -42,7 +42,7 @@ public class ClassRosterController {
                     viewStudent();
                     break;
                 case 4:
-                    io.print("REMOVE STUDENT");
+                    removeStudent();
                     break;
                 case 5:
                     keepGoing = false;
@@ -87,6 +87,16 @@ public class ClassRosterController {
         Student student = dao.getStudent(studentId);
         //Display student
         view.displayStudent(student);
+    }
+
+    private void removeStudent() {
+        view.displayRemoveStudentBanner();
+        //Fetch student ID choice
+        String studentId = view.getStudentIdChoice();
+        //Remove student
+        Student removedStudent = dao.removeStudent(studentId);
+        //Check if was removed, by knowing if above returned a student.
+        view.displayRemoveResult(removedStudent);
     }
 
 }

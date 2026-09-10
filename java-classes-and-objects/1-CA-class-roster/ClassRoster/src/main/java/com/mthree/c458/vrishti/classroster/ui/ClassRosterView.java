@@ -108,4 +108,17 @@ public class ClassRosterView {
         }
     }
 
+    public void displayRemoveStudentBanner() {
+        io.print("=== Remove Student ===");
+    }
+
+    public void displayRemoveResult(Student studentRecord) {
+        if (studentRecord != null) {
+            io.print("Student successfully removed");
+        } else {
+            io.print("No such student");
+        }
+        io.readString("Please hit enter to continue.");
+    }
+
 }
