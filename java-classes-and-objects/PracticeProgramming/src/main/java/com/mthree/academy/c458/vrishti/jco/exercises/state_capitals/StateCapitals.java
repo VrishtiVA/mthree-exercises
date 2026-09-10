@@ -1,4 +1,4 @@
-package com.mthree.academy.c458.vrishti.jco.exercises.state_capitals_1;
+package com.mthree.academy.c458.vrishti.jco.exercises.state_capitals;
 
 import java.util.HashMap;
 import java.util.Map;
