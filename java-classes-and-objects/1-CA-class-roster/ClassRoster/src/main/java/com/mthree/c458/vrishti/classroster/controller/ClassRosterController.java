@@ -1,5 +1,6 @@
 package com.mthree.c458.vrishti.classroster.controller;
 
+import com.mthree.c458.vrishti.classroster.ui.ClassRosterView;
 import com.mthree.c458.vrishti.classroster.ui.UserIO;
 import com.mthree.c458.vrishti.classroster.ui.UserIOConsoleImpl;
 
@@ -8,27 +9,20 @@ import com.mthree.c458.vrishti.classroster.ui.UserIOConsoleImpl;
  */
 public class ClassRosterController {
 
-    public UserIO io = new UserIOConsoleImpl();
+    private ClassRosterView view = new ClassRosterView();
+    private UserIO io = new UserIOConsoleImpl();
 
+    /**
+     * Ask for user selection and route the request to a private controller method.
+     */
     public void run() {
 
         boolean keepGoing = true;
         int menuSelection = 0;
 
         do {
-
-            //Show the menu
-            io.print(
-                "Main Menu" +
-                "\n1. List Student IDs" +
-                "\n2. Create New Student" +
-                "\n3. View a Student" +
-                "\n4. Remove a Student" +
-                "\n5. Exit"
-            );
-
-            //Allow user selection
-            menuSelection = io.readInt("Please select from the above choices : ", 1, 5);
+            //Take user menu choice
+            menuSelection = getMenuSelection();
 
             //Action user choice
             switch (menuSelection) {
@@ -55,6 +49,10 @@ public class ClassRosterController {
 
         io.print("GOOD BYE");
 
+    }
+
+    private int getMenuSelection() {
+        return view.printMenuAndGetSelection();
     }
 
 }
