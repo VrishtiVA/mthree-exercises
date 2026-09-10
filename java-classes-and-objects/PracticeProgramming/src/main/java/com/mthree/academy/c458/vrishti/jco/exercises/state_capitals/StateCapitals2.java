@@ -61,21 +61,50 @@ public class StateCapitals2 {
         System.out.println("=================================================================================================");
         System.out.println();
 
-        //Choose a random state out.
-        //Parameter in list is the new array to store in.
-        String[] stateList = stateCapitals.keySet().toArray(new String[50]);
-        String selectedState = stateList[randomGenerator.nextInt(stateCapitals.size())];
-
-        //Quiz the user
+        //Setup quiz for user
         System.out.println("Are you ready to test you knowledge?");
-        String userAnswer = userIO.readString("Do you know what the capital of " + selectedState + " is? : ");
+        int rounds = userIO.readInt("How many states would you like to guess? : ", 0, 50);
         System.out.println();
 
-        //Check solution
-        if (userAnswer.equalsIgnoreCase(stateCapitals.get(selectedState))) {
-            System.out.printf("Nice work! %s is correct!\n", stateCapitals.get(selectedState));
+        //Quiz utility variables
+        String[] stateList;
+        String selectedState;
+        String userAnswer;
+
+        //Quiz trackers
+        int score = 0;
+
+        //Play rounds specified
+        for (int round = 1; round <= rounds; round++) {
+            System.out.println("ROUND " + round);
+
+            //Choose a random state out.
+            //Parameter in list is the new array to store in, which will be expanded to fit.
+            stateList = stateCapitals.keySet().toArray(new String[0]);
+            selectedState = stateList[randomGenerator.nextInt(stateCapitals.size())];
+
+            //Ask question
+            userAnswer = userIO.readString("Do you know what the capital of " + selectedState + " is? : ");
+            System.out.println();
+
+            //Check solution
+            if (userAnswer.equalsIgnoreCase(stateCapitals.get(selectedState))) {
+                System.out.printf("Nice work! %s is correct!\n", stateCapitals.get(selectedState));
+                score++;
+            } else {
+                System.out.printf("Nope, it's actually %s.\n", stateCapitals.get(selectedState));
+            }
+            System.out.println();
+
+            //Remove from map to prevent reasking
+            stateCapitals.remove(selectedState);
+        }
+
+        //Display final score after playing
+        if (rounds > 0) {
+            System.out.printf("You scored %d/%d!\n", score, rounds);
         } else {
-            System.out.printf("Nope, it's actually %s.\n", stateCapitals.get(selectedState));
+            System.out.println("That's the end of this program. Good bye!");
         }
 
     }
