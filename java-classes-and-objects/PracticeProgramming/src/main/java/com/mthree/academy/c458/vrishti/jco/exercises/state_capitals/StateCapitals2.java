@@ -93,6 +93,7 @@ public class StateCapitals2 {
                 score++;
             } else {
                 System.out.printf("Nope, it's actually %s.\n", stateCapitals.get(selectedState));
+                score--;
             }
             System.out.println();
 
@@ -102,10 +103,11 @@ public class StateCapitals2 {
 
         //Display final score after playing
         if (rounds > 0) {
-            System.out.printf("You scored %d/%d!\n", score, rounds);
-        } else {
-            System.out.println("That's the end of this program. Good bye!");
+            System.out.printf("You scored %d points!\n", score);
         }
+
+        //End of program message
+        System.out.println("That's the end of this program. Good bye!");
 
     }
 }
