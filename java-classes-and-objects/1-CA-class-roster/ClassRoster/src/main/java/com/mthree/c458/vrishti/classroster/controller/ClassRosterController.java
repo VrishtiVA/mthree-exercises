@@ -7,6 +7,8 @@ import com.mthree.c458.vrishti.classroster.ui.ClassRosterView;
 import com.mthree.c458.vrishti.classroster.ui.UserIO;
 import com.mthree.c458.vrishti.classroster.ui.UserIOConsoleImpl;
 
+import java.util.List;
+
 /**
  * This is the orchestrator of the application. It knows what needs to be done, when it needs to be done, and what component can do the job.
  */
@@ -31,7 +33,7 @@ public class ClassRosterController {
             //Action user choice
             switch (menuSelection) {
                 case 1:
-                    io.print("LIST STUDENTS");
+                    listStudents();
                     break;
                 case 2:
                     createStudent();
@@ -60,7 +62,6 @@ public class ClassRosterController {
     }
 
     private void createStudent() {
-        //Display banner
         view.displayCreateStudentBanner();
         //Fetch new student from user
         Student newStudent = view.getNewStudentInfo();
@@ -68,6 +69,14 @@ public class ClassRosterController {
         dao.addStudent(newStudent.getStudentId(), newStudent);
         //Feedback to the user
         view.displayCreateStudentSuccessBanner();
+    }
+
+    private void listStudents() {
+        view.displayDisplayAllBanner();
+        //Fetch list of all students
+        List<Student> studentList = dao.getAllStudents();
+        //Display them
+        view.displayStudentList(studentList);
     }
 
 }

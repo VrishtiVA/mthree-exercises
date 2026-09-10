@@ -2,6 +2,7 @@ package com.mthree.c458.vrishti.classroster.dao;
 
 import com.mthree.c458.vrishti.classroster.dto.Student;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,9 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
 
     @Override
     public List<Student> getAllStudents() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //Coding to the interface example.
+        //This is fine since ArrayList implements List interface, so can be treated as a List.
+        return new ArrayList<Student>(students.values());
     }
 
     @Override

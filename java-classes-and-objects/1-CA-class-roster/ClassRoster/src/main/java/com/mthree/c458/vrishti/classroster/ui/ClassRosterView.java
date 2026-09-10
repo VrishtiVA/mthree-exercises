@@ -2,6 +2,8 @@ package com.mthree.c458.vrishti.classroster.ui;
 
 import com.mthree.c458.vrishti.classroster.dto.Student;
 
+import java.util.List;
+
 /**
  * This class handles all the UI logic.
  */
@@ -19,7 +21,7 @@ public class ClassRosterView {
 
         //Show the menu
         io.print(
-            "Main Menu" +
+            "\nMain Menu" +
             "\n1. List Student IDs" +
             "\n2. Create New Student" +
             "\n3. View a Student" +
@@ -63,6 +65,25 @@ public class ClassRosterView {
 
     public void displayCreateStudentSuccessBanner() {
         io.readString("Student successfully created. Please hit enter to continue...");
+    }
+
+    public void displayStudentList(List<Student> studentList) {
+
+        //Output formatted student details
+        for (Student currentStudent : studentList) {
+            String studentInfo = String.format("#%s : %s %s",
+                    currentStudent.getStudentId(),
+                    currentStudent.getFirstName(),
+                    currentStudent.getLastName()
+            );
+            io.print(studentInfo);
+        }
+
+        io.readString("Please hit enter to continue...");
+    }
+
+    public void displayDisplayAllBanner() {
+        io.print("=== Display All Students ===");
     }
 
 }
