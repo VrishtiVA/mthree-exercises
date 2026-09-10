@@ -1,5 +1,7 @@
 package com.mthree.c458.vrishti.classroster.ui;
 
+import com.mthree.c458.vrishti.classroster.dto.Student;
+
 /**
  * This class handles all the UI logic.
  */
@@ -30,6 +32,37 @@ public class ClassRosterView {
 
         //Return selection
         return menuSelection;
+    }
+
+    /**
+     * Get information from the user to create a student object.
+     * @return A newly created student object.
+     */
+    public Student getNewStudentInfo() {
+
+        //Gather details
+        String studentId = io.readString("Please enter Student ID : ");
+        String firstName = io.readString("Please enter First Name : ");
+        String lastName = io.readString("Please enter Last Name : ");
+        String cohort = io.readString("Please enter Cohort : ");
+
+        //Build new student object
+        Student currentStudent = new Student(studentId);
+        currentStudent.setFirstName(firstName);
+        currentStudent.setLastName(lastName);
+        currentStudent.setCohort(cohort);
+
+        //Return newly created student object
+        return currentStudent;
+
+    }
+
+    public void displayCreateStudentBanner() {
+        io.print("=== Create Student ===");
+    }
+
+    public void displayCreateStudentSuccessBanner() {
+        io.readString("Student successfully created. Please hit enter to continue...");
     }
 
 }

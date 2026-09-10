@@ -1,5 +1,8 @@
 package com.mthree.c458.vrishti.classroster.controller;
 
+import com.mthree.c458.vrishti.classroster.dao.ClassRosterDao;
+import com.mthree.c458.vrishti.classroster.dao.ClassRosterDaoFileImpl;
+import com.mthree.c458.vrishti.classroster.dto.Student;
 import com.mthree.c458.vrishti.classroster.ui.ClassRosterView;
 import com.mthree.c458.vrishti.classroster.ui.UserIO;
 import com.mthree.c458.vrishti.classroster.ui.UserIOConsoleImpl;
@@ -11,6 +14,7 @@ public class ClassRosterController {
 
     private ClassRosterView view = new ClassRosterView();
     private UserIO io = new UserIOConsoleImpl();
+    private ClassRosterDao dao = new ClassRosterDaoFileImpl();
 
     /**
      * Ask for user selection and route the request to a private controller method.
@@ -30,7 +34,7 @@ public class ClassRosterController {
                     io.print("LIST STUDENTS");
                     break;
                 case 2:
-                    io.print("CREATE STUDENT");
+                    createStudent();
                     break;
                 case 3:
                     io.print("VIEW STUDENT");
@@ -53,6 +57,17 @@ public class ClassRosterController {
 
     private int getMenuSelection() {
         return view.printMenuAndGetSelection();
+    }
+
+    private void createStudent() {
+        //Display banner
+        view.displayCreateStudentBanner();
+        //Fetch new student from user
+        Student newStudent = view.getNewStudentInfo();
+        //Store the new student
+        dao.addStudent(newStudent.getStudentId(), newStudent);
+        //Feedback to the user
+        view.displayCreateStudentSuccessBanner();
     }
 
 }
