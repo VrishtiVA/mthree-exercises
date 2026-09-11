@@ -28,6 +28,12 @@ public class DogBuddy {
      * @return String of woofs
      */
     public static String howManyWoofs(int numBones) {
-        return "Woof";
+
+        if (numBones <= 0)
+            return "...";
+        else if (numBones % 2 == 0)
+            return "Woof! Woof! Woof!";
+        else
+            return "Woof! Woof!";
     }
 }
