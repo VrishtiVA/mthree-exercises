@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class UserIOConsoleImpl implements UserIO {
 
     //Attributes
-    Scanner inputReader;
+    private Scanner inputReader;
 
     //Constructor (Injection)
     public UserIOConsoleImpl() {

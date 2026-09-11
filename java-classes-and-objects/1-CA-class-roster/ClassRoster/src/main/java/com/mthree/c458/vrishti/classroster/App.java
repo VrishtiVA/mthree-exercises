@@ -1,6 +1,8 @@
 package com.mthree.c458.vrishti.classroster;
 
 import com.mthree.c458.vrishti.classroster.controller.ClassRosterController;
+import com.mthree.c458.vrishti.classroster.dao.ClassRosterAuditDao;
+import com.mthree.c458.vrishti.classroster.dao.ClassRosterAuditDaoFileImpl;
 import com.mthree.c458.vrishti.classroster.dao.ClassRosterDao;
 import com.mthree.c458.vrishti.classroster.dao.ClassRosterDaoFileImpl;
 import com.mthree.c458.vrishti.classroster.service.ClassRosterServiceLayer;
@@ -17,7 +19,8 @@ public class App {
         UserIO myIo = new UserIOConsoleImpl();
         ClassRosterView myView = new ClassRosterView(myIo);
         ClassRosterDao myDao = new ClassRosterDaoFileImpl();
-        ClassRosterServiceLayer myService = new ClassRosterServiceLayerImpl(myDao);
+        ClassRosterAuditDao myAuditDao = new ClassRosterAuditDaoFileImpl();
+        ClassRosterServiceLayer myService = new ClassRosterServiceLayerImpl(myDao, myAuditDao);
 
         //Use controller to call the run method.
         ClassRosterController controller = new ClassRosterController(

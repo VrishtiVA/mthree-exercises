@@ -1,5 +1,6 @@
 package com.mthree.c458.vrishti.classroster.service;
 
+import com.mthree.c458.vrishti.classroster.dao.ClassRosterAuditDao;
 import com.mthree.c458.vrishti.classroster.dao.ClassRosterDao;
 import com.mthree.c458.vrishti.classroster.dao.ClassRosterPersistenceException;
 import com.mthree.c458.vrishti.classroster.dto.Student;
@@ -8,10 +9,12 @@ import java.util.List;
 
 public class ClassRosterServiceLayerImpl implements ClassRosterServiceLayer {
 
-    ClassRosterDao dao;
+    private ClassRosterDao dao;
+    private ClassRosterAuditDao auditDao;
 
-    public ClassRosterServiceLayerImpl(ClassRosterDao dao) {
+    public ClassRosterServiceLayerImpl(ClassRosterDao dao, ClassRosterAuditDao auditDao) {
         this.dao = dao;
+        this.auditDao = auditDao;
     }
 
     @Override
@@ -27,6 +30,9 @@ public class ClassRosterServiceLayerImpl implements ClassRosterServiceLayer {
 
         //Pass the incoming Student object to the DAO so that it can persist.
         dao.addStudent(student.getStudentId(), student);
+
+        //Audit message
+        auditDao.writeAuditEntry("Student Id " + student.getStudentId() + " CREATED.");
     }
 
     @Override
@@ -41,7 +47,13 @@ public class ClassRosterServiceLayerImpl implements ClassRosterServiceLayer {
 
     @Override
     public Student removeStudent(String studentId) throws ClassRosterPersistenceException {
-        return dao.removeStudent(studentId);
+
+        //Remove student
+        Student removedStudent = dao.removeStudent(studentId);
+        //Audit message
+        auditDao.writeAuditEntry("Student Id " + removedStudent.getStudentId() + " REMOVED.");
+        //Return removed student
+        return removedStudent;
     }
 
     /**
