@@ -1,6 +1,7 @@
 package com.mthree.c458.vrishti.classroster.controller;
 
 import com.mthree.c458.vrishti.classroster.dao.ClassRosterDao;
+import com.mthree.c458.vrishti.classroster.dao.ClassRosterDaoException;
 import com.mthree.c458.vrishti.classroster.dao.ClassRosterDaoFileImpl;
 import com.mthree.c458.vrishti.classroster.dto.Student;
 import com.mthree.c458.vrishti.classroster.ui.ClassRosterView;
@@ -28,34 +29,38 @@ public class ClassRosterController {
         boolean keepGoing = true;
         int menuSelection = 0;
 
-        do {
-            //Take user menu choice
-            menuSelection = getMenuSelection();
+        try {
+            do {
+                //Take user menu choice
+                menuSelection = getMenuSelection();
 
-            //Action user choice
-            switch (menuSelection) {
-                case 1:
-                    listStudents();
-                    break;
-                case 2:
-                    createStudent();
-                    break;
-                case 3:
-                    viewStudent();
-                    break;
-                case 4:
-                    removeStudent();
-                    break;
-                case 5:
-                    keepGoing = false;
-                    break;
-                default:
-                    unknownCommand();
-            }
+                //Action user choice
+                switch (menuSelection) {
+                    case 1:
+                        listStudents();
+                        break;
+                    case 2:
+                        createStudent();
+                        break;
+                    case 3:
+                        viewStudent();
+                        break;
+                    case 4:
+                        removeStudent();
+                        break;
+                    case 5:
+                        keepGoing = false;
+                        break;
+                    default:
+                        unknownCommand();
+                }
+            } while (keepGoing);
 
-        } while (keepGoing);
+            exitMessage();
 
-        exitMessage();
+        } catch (ClassRosterDaoException e) {
+            view.displayErrorMessage(e.getMessage());
+        }
 
     }
 
@@ -63,7 +68,7 @@ public class ClassRosterController {
         return view.printMenuAndGetSelection();
     }
 
-    private void createStudent() {
+    private void createStudent() throws ClassRosterDaoException {
         view.displayCreateStudentBanner();
         //Fetch new student from user
         Student newStudent = view.getNewStudentInfo();
@@ -73,7 +78,7 @@ public class ClassRosterController {
         view.displayCreateStudentSuccessBanner();
     }
 
-    private void listStudents() {
+    private void listStudents() throws ClassRosterDaoException {
         view.displayDisplayAllBanner();
         //Fetch list of all students
         List<Student> studentList = dao.getAllStudents();
@@ -81,7 +86,7 @@ public class ClassRosterController {
         view.displayStudentList(studentList);
     }
 
-    private void viewStudent() {
+    private void viewStudent() throws ClassRosterDaoException {
         view.displayStudentBanner();
         //Fetch student ID choice
         String studentId = view.getStudentIdChoice();
@@ -91,7 +96,7 @@ public class ClassRosterController {
         view.displayStudent(student);
     }
 
-    private void removeStudent() {
+    private void removeStudent() throws ClassRosterDaoException {
         view.displayRemoveStudentBanner();
         //Fetch student ID choice
         String studentId = view.getStudentIdChoice();

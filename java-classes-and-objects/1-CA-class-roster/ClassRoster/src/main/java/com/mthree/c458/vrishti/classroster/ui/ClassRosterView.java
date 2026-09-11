@@ -133,4 +133,9 @@ public class ClassRosterView {
         io.print("UNKNOWN COMMAND");
     }
 
+    public void displayErrorMessage(String errorMsg) {
+        io.print("=== ERROR ===");
+        io.print(errorMsg);
+    }
+
 }
