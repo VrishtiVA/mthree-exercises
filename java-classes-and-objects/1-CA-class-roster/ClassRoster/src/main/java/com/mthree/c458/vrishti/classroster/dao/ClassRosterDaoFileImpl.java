@@ -11,11 +11,31 @@ import java.util.*;
 public class ClassRosterDaoFileImpl implements ClassRosterDao {
 
     //Constants
-    public static final String ROSTER_FILE = "roster.txt";
     public static final String DELIMITER = "::";
+
+    public final String ROSTER_FILE; //Only declaration
 
     //Using a Map for now, since looking up students by ID.
     private Map<String, Student> students = new HashMap<>();
+
+    /**
+     * No-args constructor.
+     */
+    public ClassRosterDaoFileImpl() {
+        //Constructor assign where we're saving to.
+        ROSTER_FILE = "roster.txt";
+    }
+
+    /**
+     * Overloaded constructor.
+     * Allow different instances of this class to use different files.
+     * File reference can be injected upon construction - perfect for testing,
+     * as it ensures we don't overwrite our production application data.
+     * @param rosterTextFile The file to use.
+     */
+    public ClassRosterDaoFileImpl(String rosterTextFile) {
+        ROSTER_FILE = rosterTextFile;
+    }
 
     @Override
     public Student addStudent(String studentId, Student student) throws ClassRosterPersistenceException {
