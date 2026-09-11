@@ -1,8 +1,7 @@
 package com.mthree.c458.vrishti.classroster.controller;
 
 import com.mthree.c458.vrishti.classroster.dao.ClassRosterDao;
-import com.mthree.c458.vrishti.classroster.dao.ClassRosterDaoException;
-import com.mthree.c458.vrishti.classroster.dao.ClassRosterDaoFileImpl;
+import com.mthree.c458.vrishti.classroster.dao.ClassRosterPersistenceException;
 import com.mthree.c458.vrishti.classroster.dto.Student;
 import com.mthree.c458.vrishti.classroster.ui.ClassRosterView;
 
@@ -58,7 +57,7 @@ public class ClassRosterController {
 
             exitMessage();
 
-        } catch (ClassRosterDaoException e) {
+        } catch (ClassRosterPersistenceException e) {
             view.displayErrorMessage(e.getMessage());
         }
 
@@ -68,7 +67,7 @@ public class ClassRosterController {
         return view.printMenuAndGetSelection();
     }
 
-    private void createStudent() throws ClassRosterDaoException {
+    private void createStudent() throws ClassRosterPersistenceException {
         view.displayCreateStudentBanner();
         //Fetch new student from user
         Student newStudent = view.getNewStudentInfo();
@@ -78,7 +77,7 @@ public class ClassRosterController {
         view.displayCreateStudentSuccessBanner();
     }
 
-    private void listStudents() throws ClassRosterDaoException {
+    private void listStudents() throws ClassRosterPersistenceException {
         view.displayDisplayAllBanner();
         //Fetch list of all students
         List<Student> studentList = dao.getAllStudents();
@@ -86,7 +85,7 @@ public class ClassRosterController {
         view.displayStudentList(studentList);
     }
 
-    private void viewStudent() throws ClassRosterDaoException {
+    private void viewStudent() throws ClassRosterPersistenceException {
         view.displayStudentBanner();
         //Fetch student ID choice
         String studentId = view.getStudentIdChoice();
@@ -96,7 +95,7 @@ public class ClassRosterController {
         view.displayStudent(student);
     }
 
-    private void removeStudent() throws ClassRosterDaoException {
+    private void removeStudent() throws ClassRosterPersistenceException {
         view.displayRemoveStudentBanner();
         //Fetch student ID choice
         String studentId = view.getStudentIdChoice();
