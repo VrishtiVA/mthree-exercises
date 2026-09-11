@@ -12,7 +12,11 @@ public class ClassRosterView {
     //- Composition
     //- Coding to the interface, as ClassRosterView is unaware that it's writing/reading from the console.
     //  It only knows its interacting with the user.
-    public UserIO io = new UserIOConsoleImpl();
+    public UserIO io;
+
+    public ClassRosterView(UserIO io) {
+        this.io = io;
+    }
 
     public int printMenuAndGetSelection() {
 

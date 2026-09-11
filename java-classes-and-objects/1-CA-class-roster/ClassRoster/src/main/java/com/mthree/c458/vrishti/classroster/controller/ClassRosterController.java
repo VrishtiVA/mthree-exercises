@@ -4,8 +4,6 @@ import com.mthree.c458.vrishti.classroster.dao.ClassRosterDao;
 import com.mthree.c458.vrishti.classroster.dao.ClassRosterDaoFileImpl;
 import com.mthree.c458.vrishti.classroster.dto.Student;
 import com.mthree.c458.vrishti.classroster.ui.ClassRosterView;
-import com.mthree.c458.vrishti.classroster.ui.UserIO;
-import com.mthree.c458.vrishti.classroster.ui.UserIOConsoleImpl;
 
 import java.util.List;
 
@@ -14,8 +12,13 @@ import java.util.List;
  */
 public class ClassRosterController {
 
-    private ClassRosterView view = new ClassRosterView();
-    private ClassRosterDao dao = new ClassRosterDaoFileImpl();
+    private ClassRosterView view;
+    private ClassRosterDao dao;
+
+    public ClassRosterController(ClassRosterDao dao, ClassRosterView view) {
+        this.dao = dao;
+        this.view = view;
+    }
 
     /**
      * Ask for user selection and route the request to a private controller method.
