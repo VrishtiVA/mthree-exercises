@@ -50,8 +50,12 @@ public class ClassRosterServiceLayerImpl implements ClassRosterServiceLayer {
 
         //Remove student
         Student removedStudent = dao.removeStudent(studentId);
+
         //Audit message
-        auditDao.writeAuditEntry("Student Id " + removedStudent.getStudentId() + " REMOVED.");
+        if (removedStudent != null) {
+            auditDao.writeAuditEntry("Student Id " + removedStudent.getStudentId() + " REMOVED.");
+        }
+
         //Return removed student
         return removedStudent;
     }
