@@ -3,6 +3,8 @@ package com.mthree.c458.vrishti.classroster;
 import com.mthree.c458.vrishti.classroster.controller.ClassRosterController;
 import com.mthree.c458.vrishti.classroster.dao.ClassRosterDao;
 import com.mthree.c458.vrishti.classroster.dao.ClassRosterDaoFileImpl;
+import com.mthree.c458.vrishti.classroster.service.ClassRosterServiceLayer;
+import com.mthree.c458.vrishti.classroster.service.ClassRosterServiceLayerImpl;
 import com.mthree.c458.vrishti.classroster.ui.ClassRosterView;
 import com.mthree.c458.vrishti.classroster.ui.UserIO;
 import com.mthree.c458.vrishti.classroster.ui.UserIOConsoleImpl;
@@ -15,10 +17,11 @@ public class App {
         UserIO myIo = new UserIOConsoleImpl();
         ClassRosterView myView = new ClassRosterView(myIo);
         ClassRosterDao myDao = new ClassRosterDaoFileImpl();
+        ClassRosterServiceLayer myService = new ClassRosterServiceLayerImpl(myDao);
 
         //Use controller to call the run method.
         ClassRosterController controller = new ClassRosterController(
-            myDao,
+            myService,
             myView
         );
         controller.run();
