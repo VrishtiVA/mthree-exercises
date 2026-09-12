@@ -19,9 +19,21 @@ public class ArrayExerciseC {
      * 
      * @param nums
      * @return String
+     * @implNote Implemented by VrishtiVA
      */
     public String stringThemTogether(int[] nums){
-        throw new UnsupportedOperationException("Code not yet written...!");
+
+        //Prevent sb object creation if nothing to string by ending early
+        if (nums.length == 0) return "";
+
+        //Use string builder to build together
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int n : nums) {
+            stringBuilder.append(n);
+        }
+
+        //Return string form
+        return stringBuilder.toString();
     }
     
 }

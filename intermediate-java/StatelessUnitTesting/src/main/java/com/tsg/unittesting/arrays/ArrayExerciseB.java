@@ -21,10 +21,19 @@ public class ArrayExerciseB {
      * @param multiplier
      * @param numbers
      * @return int[] numbers multiplied
+     *
+     * @implNote Implemented by VrishtiVA
      */
 
     public static int[] multiplyAll(int multiplier, int[] numbers){
-        throw new UnsupportedOperationException("Code not yet written...!");
+
+        //Apply multiplier on provided numbers
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] *= multiplier;
+        }
+
+        //Return multiplied numbers
+        return numbers;
     }
     
 }

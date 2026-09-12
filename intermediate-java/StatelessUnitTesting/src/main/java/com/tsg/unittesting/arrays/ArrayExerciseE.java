@@ -4,6 +4,8 @@
 *********************************/
 package com.tsg.unittesting.arrays;
 
+import java.util.Locale;
+
 /**
  *
  * @author ahill
@@ -22,7 +24,40 @@ public class ArrayExerciseE {
      */
 
     public static String camelCaseIt(String[] words){
-        throw new UnsupportedOperationException("Code not yet written...!");
+
+        //If no words
+        if (words.length == 0) return "";
+
+        //Utility objects
+        StringBuilder stringBuilder = new StringBuilder();
+
+        //Tracking variables
+        boolean addedFirstWord = false;
+
+        //Add rest of the words
+        for (String w : words) {
+
+            //Skip if empty word
+            if (w.isEmpty()) continue;
+
+            //If we haven't added first word, add lowercase word
+            if (!addedFirstWord) {
+                stringBuilder.append(w.toLowerCase());
+                addedFirstWord = true;
+
+            } else {
+                //Otherwise follow camel case
+                stringBuilder.append(Character.toUpperCase(w.charAt(0)));
+                //Check if more than 1 character to avoid errors with substring
+                if (w.length() > 1) {
+                    stringBuilder.append(w.substring(1).toLowerCase());
+                }
+            }
+        }
+
+        //Return built string
+        return stringBuilder.toString();
+
     }
     
 }
