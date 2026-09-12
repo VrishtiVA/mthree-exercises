@@ -5,7 +5,6 @@
 package com.tsg.unittesting.arrays;
 
 /**
- *
  * @author ahill
  */
 public class ArrayExerciseA {
@@ -20,6 +19,8 @@ public class ArrayExerciseA {
      * 
      * @param numbers array of integers
      * @return int max
+     *
+     * @implNote Implemented by VrishtiVA
      */
     public static int maxOfArray(int[] numbers){
 

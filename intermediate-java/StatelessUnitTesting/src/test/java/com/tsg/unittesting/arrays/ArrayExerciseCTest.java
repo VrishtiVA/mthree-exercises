@@ -11,7 +11,7 @@ class ArrayExerciseCTest {
     static ArrayExerciseC testClass;
 
     @BeforeAll
-    static void setUp() {
+    static void setUpClass() {
         testClass = new ArrayExerciseC();
     }
 

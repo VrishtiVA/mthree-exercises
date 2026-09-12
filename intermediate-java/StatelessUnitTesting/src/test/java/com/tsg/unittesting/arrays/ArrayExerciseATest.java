@@ -12,7 +12,7 @@ class ArrayExerciseATest {
     private static ArrayExerciseA testClass;
 
     @BeforeAll
-    public static void setUp() {
+    public static void setUpClass() {
         //Since this is static, it can't refer to non-static variables.
         //So the ArrayExerciseA attribute has to be static too, unless wanting to initialize in @BeforeEach.
         //But that is unnecessary as don't need fresh, method doesn't have side effects.

@@ -16,11 +16,11 @@ public class LogicExerciseC {
      * that you must consider before going. 
      * 
      * You only go walking if it's light outside, or if you have a flashlight. 
-     * Also only if it's not raining, or if you have an umbrella. 
+     * Also, only if it's not raining, or if you have an umbrella.
      * And if it's not too hot (more than 95 degrees) and not too cold (less than 50 degrees).
      *
      * Ex:
-     * goWalky( true, false, true, true, 75  ) ->  true
+     * goWalky( true, false, true, true, 75  ) ->  false
      * goWalky( false, true, false, false, 50  ) ->  true
      * goWalky( false, false, false, false, 30  ) ->  false
      * 
