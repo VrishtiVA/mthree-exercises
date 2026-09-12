@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ArrayExerciseATest {
 
+    //This is actually unnecessary since class is static itself.
+
     private static ArrayExerciseA testClass;
 
     @BeforeAll
