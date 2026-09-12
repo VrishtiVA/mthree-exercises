@@ -24,6 +24,10 @@ public class StringsExerciseD {
      * @return String backwards
      */
     public static String simpleReverse(String phrase){
+
+        //Could use loop, but then relying on garbage collection that can run any time.
+        //Probably more efficient to use a StringBuilder object.
+
         throw new UnsupportedOperationException("Code not yet written...!");
     }
 }
