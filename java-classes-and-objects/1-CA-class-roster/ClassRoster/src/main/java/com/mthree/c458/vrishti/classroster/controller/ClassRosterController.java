@@ -1,6 +1,5 @@
 package com.mthree.c458.vrishti.classroster.controller;
 
-import com.mthree.c458.vrishti.classroster.dao.ClassRosterDao;
 import com.mthree.c458.vrishti.classroster.dao.ClassRosterPersistenceException;
 import com.mthree.c458.vrishti.classroster.dto.Student;
 import com.mthree.c458.vrishti.classroster.service.ClassRosterDataValidationException;
@@ -125,7 +124,7 @@ public class ClassRosterController {
     }
 
     private void exitMessage() {
-        view.displayExistBanner();
+        view.displayExitBanner();
     }
 
 }

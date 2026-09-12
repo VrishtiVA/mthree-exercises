@@ -125,7 +125,7 @@ public class ClassRosterView {
         io.readString("Please hit enter to continue.");
     }
 
-    public void displayExistBanner() {
+    public void displayExitBanner() {
         io.print("GOOD BYE");
     }
 
