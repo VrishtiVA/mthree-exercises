@@ -26,6 +26,39 @@ public class StringsExerciseF {
      * @return String word
      */
     public static String longestWord(String aPhrase){
-        throw new UnsupportedOperationException("Code not yet written...!");
+
+        //End early if no words
+        if (aPhrase == null || aPhrase.isBlank()) return null;
+
+        //Tracker variables;
+        String longestWord = "";
+        int longestWordLength = 0;
+
+        //Utility variables
+        int startOfWord = 0;
+
+        //Loop through phase
+        aPhrase = aPhrase.trim();
+        for (int i = 0; i < aPhrase.length(); i++) {
+
+            //If current is space, skip
+            if (aPhrase.charAt(i) == ' ') {
+                startOfWord = i+1;
+            }
+
+            //If next is space or end of phase, would be end of word.
+            if (i+1 == aPhrase.length() || aPhrase.charAt(i+1) == ' ') {
+                //If found new max, update
+                if (i - startOfWord + 1 > longestWordLength) {
+                    longestWord = aPhrase.substring(startOfWord, i+1);
+                    longestWordLength = longestWord.length();
+                }
+                //Update start
+                startOfWord = i+1;
+            }
+        }
+
+        //Return longest word
+        return longestWord;
     }
 }

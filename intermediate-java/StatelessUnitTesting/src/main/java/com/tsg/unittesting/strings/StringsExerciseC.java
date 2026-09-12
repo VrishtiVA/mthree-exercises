@@ -21,7 +21,11 @@ public class StringsExerciseC {
      * @return String
      */
     public static String removeTheVowels(String word){
-        throw new UnsupportedOperationException("Code not yet written...!");
+
+        if (word == null) return null;
+        //Replace any occurrence from the set of characters with nothing.
+        return word.replaceAll("[aeiou]", "");
+
     }
     
 }

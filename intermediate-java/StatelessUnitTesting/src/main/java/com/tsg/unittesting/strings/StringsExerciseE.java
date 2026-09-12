@@ -25,6 +25,9 @@ public class StringsExerciseE {
      * @return boolean
      */
     public static boolean containsTheOther(String one, String two){
-        throw new UnsupportedOperationException("Code not yet written...!");
+        if (one == null || two == null) return false;
+        if (one.isBlank() || two.isBlank()) return true;
+        if (one.equals(two)) return false;
+        return one.contains(two) || two.contains(one);
     }
 }

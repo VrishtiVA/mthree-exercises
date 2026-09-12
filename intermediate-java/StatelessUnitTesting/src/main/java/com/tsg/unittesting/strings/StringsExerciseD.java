@@ -25,9 +25,13 @@ public class StringsExerciseD {
      */
     public static String simpleReverse(String phrase){
 
-        //Could use loop, but then relying on garbage collection that can run any time.
-        //Probably more efficient to use a StringBuilder object.
+        if (phrase == null) return null;
 
-        throw new UnsupportedOperationException("Code not yet written...!");
+        //Could use loop to make new literals while building,
+        //but then relying on garbage collection that can run any time.
+        //Probably more efficient to use a StringBuilder object.
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(phrase);
+        return stringBuilder.reverse().toString();
     }
 }

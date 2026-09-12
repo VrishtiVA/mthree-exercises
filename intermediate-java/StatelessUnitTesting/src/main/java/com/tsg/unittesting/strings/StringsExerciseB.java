@@ -4,6 +4,8 @@
 *********************************/
 package com.tsg.unittesting.strings;
 
+import java.util.Locale;
+
 /**
  *
  * @author ahill
@@ -23,6 +25,7 @@ public class StringsExerciseB {
      * @return String triple trouble
      */
     public static String tripleIt(String theString){
-        throw new UnsupportedOperationException("Code not yet written...!");
+        if (theString == null) return null;
+        else return theString + theString.toUpperCase() + theString.toLowerCase();
     }
 }

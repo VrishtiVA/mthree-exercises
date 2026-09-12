@@ -36,7 +36,7 @@ class StringsExerciseBTest {
         //Arrange & Act
         String result = StringsExerciseB.tripleIt("Llama");
         //Assert
-        assertEquals("llamaLLAMAllama", result);
+        assertEquals("LlamaLLAMAllama", result);
     }
 
     @Test

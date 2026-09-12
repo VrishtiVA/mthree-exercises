@@ -17,7 +17,7 @@ class StringsExerciseETest {
      * null ( "", null ) ->  false
      *
      * //Empty:
-     * one empty ( "", "one" ) ->  false
+     * one empty ( "", "one" ) ->  true
      * contains empty ( "fancypants", "" ) ->  true
      *
      * //Contains
@@ -39,35 +39,23 @@ class StringsExerciseETest {
     }
 
     @Test
-    void testContainsTheOtherOneNull() {
+    void testContainsTheOtherEitherNull() {
         //Arrange & Act
         boolean result = StringsExerciseE.containsTheOther(null, "");
+        boolean result2 = StringsExerciseE.containsTheOther("", null);
         //Assert
         assertFalse(result, "Result should be false, as null can't contain anything.");
+        assertFalse(result2, "Result should be false, as null can't contain anything.");
     }
 
     @Test
-    void testContainsTheOtherTwoNull() {
-        //Arrange & Act
-        boolean result = StringsExerciseE.containsTheOther("", null);
-        //Assert
-        assertFalse(result, "Result should be false, as string doesn't contain null.");
-    }
-
-    @Test
-    void testContainsTheOtherOneEmpty() {
+    void testContainsTheOtherEitherEmpty() {
         //Arrange & Act
         boolean result = StringsExerciseE.containsTheOther("", "one");
-        //Assert
-        assertFalse(result);
-    }
-
-    @Test
-    void testContainsTheOtherTwoEmpty() {
-        //Arrange & Act
-        boolean result = StringsExerciseE.containsTheOther("fancypants", "");
+        boolean result2 = StringsExerciseE.containsTheOther("fancypants", "");
         //Assert
         assertTrue(result);
+        assertTrue(result2);
     }
 
     @Test
@@ -81,7 +69,7 @@ class StringsExerciseETest {
     @Test
     void testContainsTheOtherStart() {
         //Arrange & Act
-        boolean result = StringsExerciseE.containsTheOther("fancypants", "fancy");
+        boolean result = StringsExerciseE.containsTheOther("fancy", "fancypants");
         //Assert
         assertTrue(result);
     }
