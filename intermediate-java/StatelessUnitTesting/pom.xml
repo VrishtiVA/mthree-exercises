@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.tsguild</groupId>
     <artifactId>StatelessUnitTesting</artifactId>
-    <name>Stateless Unit Testing</name>
+    <name>Stateless Unit Testing</name> 
     <version>1.0.0</version>
     <packaging>jar</packaging>
     
