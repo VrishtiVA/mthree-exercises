@@ -25,7 +25,7 @@ class ArrayExerciseATest {
     Test Approach: Unit testing, potentially automated with GitHub Actions too.
     Test Cases:
 
-    empty array {} -> null
+    empty array {} -> 0
     non init array {0, 0, 0} -> 0
     mix of nums and nulls array {1, 2, -1, 0} -> ignore nulls, give max
     single value array {1} -> 1
@@ -43,7 +43,7 @@ class ArrayExerciseATest {
         //Act
         int maxOfArray = testClass.maxOfArray(arr);
         //Assert
-        assertNull(maxOfArray, "The maximum should be null.");
+        assertEquals(0, maxOfArray, "The maximum should be 0, since empty.");
     }
 
     @Test
