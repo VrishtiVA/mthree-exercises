@@ -35,9 +35,147 @@ public class LogicExerciseE {
      * @param frequencyTHZ
      * @param photonicEnergyEV
      * @return String color
+     * @implNote Implemented by VrishtiVA
      */
     public static String whatColor(int waveLengthNM, int frequencyTHZ, double photonicEnergyEV) {
-        throw new UnsupportedOperationException("Code not yet written...!");
+
+        //Hold values so not become so annoying
+        int[] WAVELENGTH_BREAKPOINTS = new int[]{380, 450, 495, 570, 590, 620, 750};
+        int[] FREQUENCY_BREAKPOINTS = new int[]{789, 668, 606, 526, 508, 484, 400};
+        double[] ENERGY_BREAKPOINTS = new double[]{3.26, 2.75, 2.5, 2.17, 2.10, 2, 1.65};
+
+        //Categorise
+        if (waveLengthNM > WAVELENGTH_BREAKPOINTS[0] && waveLengthNM < WAVELENGTH_BREAKPOINTS[1]) {
+
+            //Validity for violet
+            if (frequencyTHZ <= FREQUENCY_BREAKPOINTS[0] && frequencyTHZ >= FREQUENCY_BREAKPOINTS[1] && photonicEnergyEV <= ENERGY_BREAKPOINTS[0] && photonicEnergyEV >= ENERGY_BREAKPOINTS[1])
+                return "Violet";
+
+            else return "Unknown";
+
+        } else if (waveLengthNM == WAVELENGTH_BREAKPOINTS[1]) {
+
+            //Exactly on transition
+            if (frequencyTHZ == FREQUENCY_BREAKPOINTS[1] && photonicEnergyEV == ENERGY_BREAKPOINTS[1])
+                return "Violet-Blue";
+
+                //Validity for violet
+            else if (frequencyTHZ <= FREQUENCY_BREAKPOINTS[0] && frequencyTHZ >= FREQUENCY_BREAKPOINTS[1] && photonicEnergyEV <= ENERGY_BREAKPOINTS[0] && photonicEnergyEV >= ENERGY_BREAKPOINTS[1])
+                return "Violet";
+
+                //Validity for blue
+            else if (frequencyTHZ <= FREQUENCY_BREAKPOINTS[1] && frequencyTHZ >= FREQUENCY_BREAKPOINTS[2] && photonicEnergyEV <= ENERGY_BREAKPOINTS[1] && photonicEnergyEV >= ENERGY_BREAKPOINTS[2])
+                return "Blue";
+
+            else return "Unknown";
+
+        } else if (waveLengthNM < WAVELENGTH_BREAKPOINTS[2]) {
+
+            //Validity for blue
+            if (frequencyTHZ <= FREQUENCY_BREAKPOINTS[1] && frequencyTHZ >= FREQUENCY_BREAKPOINTS[2] && photonicEnergyEV <= ENERGY_BREAKPOINTS[1] && photonicEnergyEV >= ENERGY_BREAKPOINTS[2])
+                return "Blue";
+
+            else return "Unknown";
+
+        } else if (waveLengthNM == WAVELENGTH_BREAKPOINTS[2]) {
+
+            //Exactly on transition
+            if (frequencyTHZ == FREQUENCY_BREAKPOINTS[2] && photonicEnergyEV == ENERGY_BREAKPOINTS[2])
+                return "Green-Blue";
+
+                //Validity for blue
+            else if (frequencyTHZ <= FREQUENCY_BREAKPOINTS[1] && frequencyTHZ >= FREQUENCY_BREAKPOINTS[2] && photonicEnergyEV <= ENERGY_BREAKPOINTS[1] && photonicEnergyEV >= ENERGY_BREAKPOINTS[2])
+                return "Blue";
+
+                //Validity for green
+            else if (frequencyTHZ <= FREQUENCY_BREAKPOINTS[2] && frequencyTHZ >= FREQUENCY_BREAKPOINTS[3] && photonicEnergyEV <= ENERGY_BREAKPOINTS[2] && photonicEnergyEV >= ENERGY_BREAKPOINTS[3])
+                return "Green";
+
+            else return "Unknown";
+
+        } else if (waveLengthNM < WAVELENGTH_BREAKPOINTS[3]) {
+
+            //Validity for green
+            if (frequencyTHZ <= FREQUENCY_BREAKPOINTS[2] && frequencyTHZ >= FREQUENCY_BREAKPOINTS[3] && photonicEnergyEV <= ENERGY_BREAKPOINTS[2] && photonicEnergyEV >= ENERGY_BREAKPOINTS[3])
+                return "Green";
+
+            else return "Unknown";
+
+        } else if (waveLengthNM == WAVELENGTH_BREAKPOINTS[3]) {
+
+            //Exactly on transition
+            if (frequencyTHZ == FREQUENCY_BREAKPOINTS[3] && photonicEnergyEV == ENERGY_BREAKPOINTS[3])
+                return "Yellow-Green";
+
+            //Validity for green
+            if (frequencyTHZ <= FREQUENCY_BREAKPOINTS[2] && frequencyTHZ >= FREQUENCY_BREAKPOINTS[3] && photonicEnergyEV <= ENERGY_BREAKPOINTS[2] && photonicEnergyEV >= ENERGY_BREAKPOINTS[3])
+                return "Green";
+
+                //Validity for yellow
+            else if (frequencyTHZ <= FREQUENCY_BREAKPOINTS[3] && frequencyTHZ >= FREQUENCY_BREAKPOINTS[4] && photonicEnergyEV <= ENERGY_BREAKPOINTS[3] && photonicEnergyEV >= ENERGY_BREAKPOINTS[4])
+                return "Yellow";
+
+            else return "Unknown";
+
+        } else if (waveLengthNM < WAVELENGTH_BREAKPOINTS[4]) {
+
+            //Validity for yellow
+            if (frequencyTHZ <= FREQUENCY_BREAKPOINTS[3] && frequencyTHZ >= FREQUENCY_BREAKPOINTS[4] && photonicEnergyEV <= ENERGY_BREAKPOINTS[3] && photonicEnergyEV >= ENERGY_BREAKPOINTS[4])
+                return "Yellow";
+
+            else return "Unknown";
+
+        } else if (waveLengthNM == WAVELENGTH_BREAKPOINTS[4]) {
+
+            //Exactly on transition
+            if (frequencyTHZ == FREQUENCY_BREAKPOINTS[4] && photonicEnergyEV == ENERGY_BREAKPOINTS[4])
+                return "Orange-Yellow";
+
+                //Validity for yellow
+            else if (frequencyTHZ <= FREQUENCY_BREAKPOINTS[3] && frequencyTHZ >= FREQUENCY_BREAKPOINTS[4] && photonicEnergyEV <= ENERGY_BREAKPOINTS[3] && photonicEnergyEV >= ENERGY_BREAKPOINTS[4])
+                return "Yellow";
+
+                //Validity for orange
+            else if (frequencyTHZ <= FREQUENCY_BREAKPOINTS[4] && frequencyTHZ >= FREQUENCY_BREAKPOINTS[5] && photonicEnergyEV <= ENERGY_BREAKPOINTS[4] && photonicEnergyEV >= ENERGY_BREAKPOINTS[5])
+                return "Orange";
+
+            else return "Unknown";
+
+        } else if (waveLengthNM < WAVELENGTH_BREAKPOINTS[5]) {
+
+            //Validity for orange
+            if (frequencyTHZ <= FREQUENCY_BREAKPOINTS[4] && frequencyTHZ >= FREQUENCY_BREAKPOINTS[5] && photonicEnergyEV <= ENERGY_BREAKPOINTS[4] && photonicEnergyEV >= ENERGY_BREAKPOINTS[5])
+                return "Orange";
+
+            else return "Unknown";
+
+        } else if (waveLengthNM == WAVELENGTH_BREAKPOINTS[5]) {
+
+            //Exactly on transition
+            if (frequencyTHZ == FREQUENCY_BREAKPOINTS[5] && photonicEnergyEV == ENERGY_BREAKPOINTS[5])
+                return "Red-Orange";
+
+                //Validity for orange
+            else if (frequencyTHZ <= FREQUENCY_BREAKPOINTS[4] && frequencyTHZ >= FREQUENCY_BREAKPOINTS[5] && photonicEnergyEV <= ENERGY_BREAKPOINTS[4] && photonicEnergyEV >= ENERGY_BREAKPOINTS[5])
+                return "Orange";
+
+                //Validity for orange
+            else if (frequencyTHZ <= FREQUENCY_BREAKPOINTS[5] && frequencyTHZ >= FREQUENCY_BREAKPOINTS[6] && photonicEnergyEV <= ENERGY_BREAKPOINTS[5] && photonicEnergyEV >= ENERGY_BREAKPOINTS[6])
+                return "Red";
+
+            else return "Unknown";
+
+        } else if (waveLengthNM <= WAVELENGTH_BREAKPOINTS[6]) {
+
+            //Validity for red
+            if (frequencyTHZ <= FREQUENCY_BREAKPOINTS[5] && frequencyTHZ >= FREQUENCY_BREAKPOINTS[6] && photonicEnergyEV <= ENERGY_BREAKPOINTS[5] && photonicEnergyEV >= ENERGY_BREAKPOINTS[6])
+                return "Red";
+
+            else return "Unknown";
+
+        } else {
+            return "Unknown";
+        }
     }
 
 }

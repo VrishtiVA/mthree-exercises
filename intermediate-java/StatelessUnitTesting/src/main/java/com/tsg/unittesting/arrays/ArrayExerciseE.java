@@ -21,6 +21,7 @@ public class ArrayExerciseE {
      * camelCaseIt( {"DO", "OR", "DO", "NOT", "THERE", "IS", "NO", "TRY"}  ) ->  "doOrDoNotThereIsNoTry"
      * @param words
      * @return String camelCased phrase
+     * @implNote Implemented by VrishtiVA
      */
 
     public static String camelCaseIt(String[] words){

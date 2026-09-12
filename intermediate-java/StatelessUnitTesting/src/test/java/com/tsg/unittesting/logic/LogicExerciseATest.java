@@ -39,8 +39,11 @@ class LogicExerciseATest {
 
         //Act
         String result = LogicExerciseA.friendlyGreeting(null , false);
+        String result2 = LogicExerciseA.friendlyGreeting("" , false);
+
         //Assert
         assertEquals("...", result, "Don't greet strangers.");
+        assertEquals("...", result2, "Don't greet strangers.");
     }
 
     @Test
@@ -48,7 +51,10 @@ class LogicExerciseATest {
 
         //Act
         String result = LogicExerciseA.friendlyGreeting(null , true);
+        String result2 = LogicExerciseA.friendlyGreeting("" , true);
+
         //Assert
         assertEquals("...", result, "You don't know how to greet the nameless.");
+        assertEquals("...", result2, "You don't know how to greet the nameless.");
     }
 }

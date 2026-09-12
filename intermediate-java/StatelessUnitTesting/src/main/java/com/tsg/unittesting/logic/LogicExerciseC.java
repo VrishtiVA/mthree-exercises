@@ -30,9 +30,16 @@ public class LogicExerciseC {
      * @param haveUmbrella
      * @param degreesFarenheit
      * @return boolean
+     * @implNote Implemented by VrishtiVA
      */
     public static boolean goWalky(boolean isDark, boolean haveFlashlight, boolean isRaining, boolean haveUmbrella, int degreesFarenheit) {
-        throw new UnsupportedOperationException("Code not yet written...!");
+
+        return (
+            (!isDark || haveFlashlight)
+            && (!isRaining || haveUmbrella)
+            && (degreesFarenheit >= 50 && degreesFarenheit <= 95)
+        );
+
     }
 
 

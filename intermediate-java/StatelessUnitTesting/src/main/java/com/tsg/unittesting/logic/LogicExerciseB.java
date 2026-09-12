@@ -23,9 +23,18 @@ public class LogicExerciseB {
      *
      * @param place
      * @return String
+     * @implNote Implemented by VrishtiVA
      */
     public String placeOf(int place) {
-        throw new UnsupportedOperationException("Code not yet written...!");
+
+        //Just consider the unit, found by mod 10.
+        switch (place % 10) {
+            case 1: return place + "st";
+            case 2: return place + "nd";
+            case 3: return place + "rd";
+            default: return place + "th";
+        }
+
     }
 
 }

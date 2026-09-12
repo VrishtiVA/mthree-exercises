@@ -23,9 +23,10 @@ public class LogicExerciseD {
      * @param letterOne
      * @param letterTwo
      * @return boolean
+     * @implNote Implemented by VrishtiVA
      */
     public static boolean isFirstTheFirst(char letterOne, char letterTwo) {
-        throw new UnsupportedOperationException("Code not yet written...!");
+        return Character.toLowerCase(letterOne) < Character.toLowerCase(letterTwo);
     }
 
 }

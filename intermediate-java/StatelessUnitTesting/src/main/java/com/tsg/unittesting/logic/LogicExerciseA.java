@@ -25,9 +25,18 @@ public class LogicExerciseA {
      * @param visitorName
      * @param isFriend
      * @return String greeting
+     * @implNote Implemented by VrishtiVA
      */
     public static String friendlyGreeting(String visitorName, boolean isFriend) {
-        throw new UnsupportedOperationException("Code not yet written...!");
+
+        //Don't greet the nameless
+        if (visitorName == null || visitorName.isBlank()) return "...";
+
+        //Greet depending on if friend or not
+        if (isFriend)
+            return "Hello, " + visitorName + "!";
+        else
+            return "hi";
     }
 
 }
