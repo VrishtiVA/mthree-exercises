@@ -36,6 +36,7 @@ public class HappyLlamasTest {
     
     @Test
     public void testNormalTrampoline10() {
+
         // ARRANGE - for simple methods, this means setting up the parameters
         boolean isNasaFabric = false;
         int numTrampolines = 10;
