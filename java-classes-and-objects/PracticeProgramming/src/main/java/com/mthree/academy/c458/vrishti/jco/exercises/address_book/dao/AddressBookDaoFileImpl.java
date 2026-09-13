@@ -73,7 +73,7 @@ public class AddressBookDaoFileImpl implements AddressBookDao {
     }
 
     @Override
-    public boolean updateAddressFirstName(long addressId, String updateWith) {
+    public boolean updateFirstName(long addressId, String updateWith) {
 
         String previousValue = getAddressById(addressId).getFirstName();
         try {
@@ -93,7 +93,7 @@ public class AddressBookDaoFileImpl implements AddressBookDao {
     }
 
     @Override
-    public boolean updateAddressLastName(long addressId, String updateWith) {
+    public boolean updateLastName(long addressId, String updateWith) {
 
         String previousValue = getAddressById(addressId).getLastName();
         try {

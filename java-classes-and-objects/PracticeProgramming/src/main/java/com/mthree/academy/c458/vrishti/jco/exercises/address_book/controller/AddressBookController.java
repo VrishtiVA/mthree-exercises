@@ -147,11 +147,11 @@ public class AddressBookController {
             switch (view.printAndGetEditAddressMenuSelection()) {
                 case 1:
                     updateWith = view.getField("First Name");
-                    dao.updateAddressFirstName(address.getId(), updateWith);
+                    dao.updateFirstName(address.getId(), updateWith);
                     break;
                 case 2:
                     updateWith = view.getField("Last Name");
-                    dao.updateAddressLastName(address.getId(), updateWith);
+                    dao.updateLastName(address.getId(), updateWith);
                     break;
                 case 3:
                     updateWith = view.getField("Street Address");

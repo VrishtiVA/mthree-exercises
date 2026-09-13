@@ -43,9 +43,9 @@ public interface AddressBookDao {
 
     public Address getAddressById(long addressId);
 
-    public boolean updateAddressFirstName(long addressId, String updateWith);
+    public boolean updateFirstName(long addressId, String updateWith);
 
-    public boolean updateAddressLastName(long addressId, String updateWith);
+    public boolean updateLastName(long addressId, String updateWith);
 
     public boolean updateAddressStreet(long addressId, String updateWith);
 

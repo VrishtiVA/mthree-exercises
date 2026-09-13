@@ -80,7 +80,7 @@ class ClassRosterDaoFileImplTest {
         //Act: Retrieve all students
         List<Student> allStudents = testDao.getAllStudents();
 
-        //Asset: Check general contents of List
+        //Assert: Check general contents of List
         assertNotNull(allStudents, "The list of students must not be null.");
         assertEquals(2, allStudents.size(), "List of students should have 2 students");
         //Assert: Check specific contents of List

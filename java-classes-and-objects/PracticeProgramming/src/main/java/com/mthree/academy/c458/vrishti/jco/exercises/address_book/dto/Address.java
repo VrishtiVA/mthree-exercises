@@ -1,5 +1,7 @@
 package com.mthree.academy.c458.vrishti.jco.exercises.address_book.dto;
 
+import java.util.Objects;
+
 /**
  * Domain Object
  */
@@ -39,5 +41,33 @@ public class Address {
     public void setState(String state) {this.state = state;}
     public void setCountry(String country) {this.country = country;}
     public void setPostCode(String postCode) {this.postCode = postCode;}
+
+    /* ----- Other Supporting Methods ----- */
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return id == address.id && Objects.equals(firstName, address.firstName) && Objects.equals(lastName, address.lastName) && Objects.equals(street, address.street) && Objects.equals(city, address.city) && Objects.equals(state, address.state) && Objects.equals(country, address.country) && Objects.equals(postCode, address.postCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, street, city, state, country, postCode);
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", street='" + street + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", country='" + country + '\'' +
+                ", postCode='" + postCode + '\'' +
+                '}';
+    }
 
 }
