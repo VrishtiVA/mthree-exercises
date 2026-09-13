@@ -58,4 +58,101 @@ public class AddressBookDaoFileImpl implements AddressBookDao {
         return matchingAddresses;
     }
 
+//    @Override
+//    public boolean editAddress(long addressId, String firstName, String lastName, String street, String city, String state, String country, String postCode) {
+//
+//        //Cannot update non-existing address
+//        if (!addressMap.containsKey(addressId)) return false;
+//
+//        //Get address to update
+//        Address addressToUpdate = addressMap.get(addressId);
+//
+//        //Apply updates
+//        if (firstName != null) addressToUpdate.setFirstName(firstName);
+//        if (lastName != null) addressToUpdate.setLastName(lastName);
+//        if (street != null) addressToUpdate.setStreet(street);
+//        if (city != null) addressToUpdate.setCity(city);
+//        if (state != null) addressToUpdate.setState(state);
+//        if (country != null) addressToUpdate.setCountry(country);
+//        if (postCode != null) addressToUpdate.setPostCode(postCode);
+//
+//        //Return true to note updates completed
+//        return true;
+//    }
+
+    @Override
+    public Address getAddressById(long addressId) {
+        return addressMap.get(addressId);
+    }
+
+    @Override
+    public boolean updateAddressFirstName(long addressId, String updateWith) {
+        try {
+            getAddressById(addressId).setFirstName(updateWith);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateAddressLastName(long addressId, String updateWith) {
+        try {
+            getAddressById(addressId).setLastName(updateWith);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateAddressStreet(long addressId, String updateWith) {
+        try {
+            getAddressById(addressId).setStreet(updateWith);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateAddressCity(long addressId, String updateWith) {
+        try {
+            getAddressById(addressId).setCity(updateWith);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateAddressState(long addressId, String updateWith) {
+        try {
+            getAddressById(addressId).setState(updateWith);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateAddressCountry(long addressId, String updateWith) {
+        try {
+            getAddressById(addressId).setCountry(updateWith);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateAddressPostCode(long addressId, String updateWith) {
+        try {
+            getAddressById(addressId).setPostCode(updateWith);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }

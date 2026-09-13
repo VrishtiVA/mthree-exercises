@@ -25,9 +25,10 @@ public class AddressBookView {
             "\n3. Find Addresses By Last Name" +
             "\n4. Find Address Count" +
             "\n5. List All Addresses" +
-            "\n6. Quit Program"
+            "\n6. Edit Address" +
+            "\n7. Quit Program"
         );
-        return userIO.readInt("Your selection : ", 1, 6);
+        return userIO.readInt("Your selection : ", 1, 7);
     }
 
     public void printTitle() {
@@ -98,17 +99,59 @@ public class AddressBookView {
 
         //Go for 200
         for (Address address : addresses) {
-            userIO.print(
-                "\nAddress ID " + address.getId() + ":" +
-                "\n\t" + address.getFirstName() + " " + address.getLastName() +
-                "\n\t" + address.getStreet() +
-                "\n\t" + address.getCity() + ", " + address.getState() + ", " + address.getCountry() +
-                "\n\t" + address.getPostCode()
-            );
+            printAddress(address);
         }
+    }
+
+    public void printAddress(Address address) {
+        if (address == null) return;
+
+        userIO.print(
+            "\nAddress ID " + address.getId() + ":" +
+            "\n\t" + address.getFirstName() + " " + address.getLastName() +
+            "\n\t" + address.getStreet() +
+            "\n\t" + address.getCity() + ", " + address.getState() + ", " + address.getCountry() +
+            "\n\t" + address.getPostCode()
+        );
     }
 
     public void displayAddressCount(int addressCount) {
         userIO.print("There are " + addressCount + " addresses in the address book.");
+    }
+
+    public boolean confirmRemoveAddress(Address address) {
+
+        //Display address
+        printAddress(address);
+
+        //Confirm delete
+        String userInput = userIO.readString("Are you sure you wish to remove this address? (y/n) : ").trim();
+        if (!userInput.isBlank())
+            return Character.toLowerCase(userInput.charAt(0)) == 'Y';
+        else
+            return false;
+    }
+
+    public void printCancelledOperation() {
+        userIO.print("Cancelled Operation.");
+    }
+
+    public String getField(String field) {
+        return userIO.readString("Enter New " + field + " : ");
+    }
+
+    public int printAndGetEditAddressMenuSelection() {
+        userIO.print(
+            "\nPlease select the field you wish to update:" +
+                "\n1. First Name" +
+                "\n2. Last Name" +
+                "\n3. Street Address" +
+                "\n4. City" +
+                "\n5. State" +
+                "\n6. Country" +
+                "\n7. Post Code" +
+                "\n8. Go Back"
+        );
+        return userIO.readInt("Your selection : ", 1, 8);
     }
 }

@@ -41,4 +41,42 @@ public interface AddressBookDao {
      */
     public List<Address> getAllAddressesByLastName(String lastName);
 
+//    /**
+//     * @param addressId The ID of the address to edit
+//     * @param firstName Update firstName with this if not null
+//     * @param lastName Update lastName with this if not null
+//     * @param street Update street with this if not null
+//     * @param city Update city with this if not null
+//     * @param state Update state with this if not null
+//     * @param country Update country with this if not null
+//     * @param postCode Update postCode with this if not null
+//     * @return true if successfully updated address, otherwise false.
+//     */
+//    public boolean editAddress(
+//        long addressId,
+//        String firstName,
+//        String lastName,
+//        String street,
+//        String city,
+//        String state,
+//        String country,
+//        String postCode
+//    );
+
+    public Address getAddressById(long addressId);
+
+    public boolean updateAddressFirstName(long addressId, String updateWith);
+
+    public boolean updateAddressLastName(long addressId, String updateWith);
+
+    public boolean updateAddressStreet(long addressId, String updateWith);
+
+    public boolean updateAddressCity(long addressId, String updateWith);
+
+    public boolean updateAddressState(long addressId, String updateWith);
+
+    public boolean updateAddressCountry(long addressId, String updateWith);
+
+    public boolean updateAddressPostCode(long addressId, String updateWith);
+
 }
