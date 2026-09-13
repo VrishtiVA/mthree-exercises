@@ -13,17 +13,17 @@ public interface AddressBookDao {
     /**
      * Add an address to the address book
      * @param address The address to add.
-     * @return the Address object that was added.
+     * @return true if the address was added, otherwise false.
      */
-    public Address addAddress(Address address);
+    public boolean addAddress(Address address);
 
     /**
      * Remove an address from the address book.
      * Remove by ID, since last name should not be able to uniquely identify an address to delete.
      * @param id The ID of the address to remove.
-     * @return the Address object that was removed.
+     * @return true if the address was removed, otherwise false.
      */
-    public Address removeAddress(long id);
+    public boolean removeAddress(long id);
 
     /**
      * @return The number of addresses in the address book.

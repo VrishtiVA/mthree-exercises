@@ -9,7 +9,7 @@ classDiagram
 
     AddressBookController *-- "1" AddressBookDao : "has a"
     AddressBookController *-- "1" AddressBookView : "has a"
-    AddressBookView *-- "1" Scanner : "has a"
+    UserIOConsoleImpl *-- "1" Scanner : "has a"
     AddressBookView *-- "1" UserIO : "has a"
     
     class App {
@@ -42,13 +42,13 @@ classDiagram
     class Address {
         <<class>>
         
-        +long id
-        +String firstName
-        +String lastName
-        +String streetAddress
-        +String state
-        +String country
-        +String postCode
+        -long id
+        -String firstName
+        -String lastName
+        -String streetAddress
+        -String state
+        -String country
+        -String postCode
     }
 
     class UserIO {
