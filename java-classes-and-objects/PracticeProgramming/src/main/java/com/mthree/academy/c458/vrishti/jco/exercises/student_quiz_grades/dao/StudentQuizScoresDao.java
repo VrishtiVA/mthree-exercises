@@ -38,4 +38,6 @@ public interface StudentQuizScoresDao {
 
     List<Student> getStudentsWithLowestScore(int quizNo);
 
+    int getQuizCount();
+
 }

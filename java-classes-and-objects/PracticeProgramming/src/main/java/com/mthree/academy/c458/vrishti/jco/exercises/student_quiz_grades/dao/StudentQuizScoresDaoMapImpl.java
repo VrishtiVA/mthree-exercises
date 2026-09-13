@@ -84,7 +84,9 @@ public class StudentQuizScoresDaoMapImpl implements StudentQuizScoresDao {
         //Find what is the highest score
         double maxScore = 0;
         for (List<Double> scores : studentQuizScores.values()) {
-            maxScore = Math.max(maxScore, scores.get(quizNo));
+            try {
+                maxScore = Math.max(maxScore, scores.get(quizNo));
+            } catch (ArrayIndexOutOfBoundsException e) {continue;}
         }
 
         //Find students who have this max score
@@ -104,9 +106,11 @@ public class StudentQuizScoresDaoMapImpl implements StudentQuizScoresDao {
         List<Student> lowScorers = new ArrayList<>();
 
         //Find what is the lowest score
-        double minScore = 0;
+        double minScore = Double.MAX_VALUE;
         for (List<Double> scores : studentQuizScores.values()) {
-            minScore = Math.min(minScore, scores.get(quizNo));
+            try {
+                minScore = Math.min(minScore, scores.get(quizNo));
+            } catch (ArrayIndexOutOfBoundsException e) {continue;}
         }
 
         //Find students who have this low score
@@ -117,6 +121,22 @@ public class StudentQuizScoresDaoMapImpl implements StudentQuizScoresDao {
 
         //Return low scorers
         return lowScorers;
+    }
+
+    @Override
+    public int getQuizCount() {
+
+        //No quiz data
+        if (studentQuizScores.isEmpty()) return 0;
+
+        //Find max number of quizzes recorded for a student
+        int maxCount = 0;
+        for (List<Double> scores : studentQuizScores.values()) {
+            maxCount = Math.max(maxCount, scores.size());
+        }
+
+        //Return max quiz count
+        return maxCount;
     }
 
 }

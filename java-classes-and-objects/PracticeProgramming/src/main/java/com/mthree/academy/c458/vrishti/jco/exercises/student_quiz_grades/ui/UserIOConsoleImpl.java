@@ -1,7 +1,5 @@
 package com.mthree.academy.c458.vrishti.jco.exercises.student_quiz_grades.ui;
 
-import com.mthree.academy.c458.vrishti.jco.exercises.user_io_class_lab.UserIO;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
