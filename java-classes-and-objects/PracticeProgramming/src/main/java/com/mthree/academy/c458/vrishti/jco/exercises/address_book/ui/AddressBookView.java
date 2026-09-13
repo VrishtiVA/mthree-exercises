@@ -116,7 +116,7 @@ public class AddressBookView {
     }
 
     public void displayAddressCount(int addressCount) {
-        userIO.print("There are " + addressCount + " addresses in the address book.");
+        userIO.print("There " + (addressCount == 1 ? "is 1 address" :  "are " + addressCount + " addresses") + " in the address book.");
     }
 
     public boolean confirmRemoveAddress(Address address) {
@@ -125,9 +125,9 @@ public class AddressBookView {
         printAddress(address);
 
         //Confirm delete
-        String userInput = userIO.readString("Are you sure you wish to remove this address? (y/n) : ").trim();
+        String userInput = userIO.readString("\nAre you sure you wish to remove this address? (y/n) : ").trim();
         if (!userInput.isBlank())
-            return Character.toLowerCase(userInput.charAt(0)) == 'Y';
+            return Character.toUpperCase(userInput.charAt(0)) == 'Y';
         else
             return false;
     }
