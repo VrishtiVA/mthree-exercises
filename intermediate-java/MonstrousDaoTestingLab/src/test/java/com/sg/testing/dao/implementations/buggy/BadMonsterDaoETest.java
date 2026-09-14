@@ -89,6 +89,21 @@ class BadMonsterDaoETest {
     }
 
     @Test
+    void testGetMonsterIdempotent() {
+
+        //Arrange
+        Monster sampleMonster = getSampleMonster1();
+        testDao.addMonster(1, sampleMonster);
+        testDao.getMonster(1);
+
+        //Act
+        Monster retrievedMonster = testDao.getMonster(1);
+
+        //Assert
+        assertEquals(sampleMonster, retrievedMonster);
+    }
+
+    @Test
     void testGetMonsterNull() {
 
         //Act

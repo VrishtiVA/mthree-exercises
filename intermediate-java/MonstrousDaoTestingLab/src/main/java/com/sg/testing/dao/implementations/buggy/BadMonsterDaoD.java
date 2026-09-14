@@ -39,8 +39,9 @@ public class BadMonsterDaoD implements MonsterDao {
     @Override
     public void updateMonster(int id, Monster m) {
         if(monsters.containsKey(id))
-            monsters.remove(id);
-        monsters.put(id, m);
+//            monsters.remove(id);
+            monsters.put(id, m);
+        //It was putting when doesnt have, when shouldn't
     }
 
     @Override

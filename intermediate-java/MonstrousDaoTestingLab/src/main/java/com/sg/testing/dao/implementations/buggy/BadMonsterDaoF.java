@@ -36,9 +36,10 @@ public class BadMonsterDaoF implements MonsterDao {
     @Override
     public List<Monster> getAllMonsters() {
         List<Monster> monsterList = new ArrayList<>(monsters.values());
-        for (int id : monsters.keySet()) {
-            monsterList.add(monsters.get(id));
-        }
+//        for (int id : monsters.keySet()) {
+//            monsterList.add(monsters.get(id));
+//        }
+        //Shouldn't add all twice
         return monsterList;
     }
 

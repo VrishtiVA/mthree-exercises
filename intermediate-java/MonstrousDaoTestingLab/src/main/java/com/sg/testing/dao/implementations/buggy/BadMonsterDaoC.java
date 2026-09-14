@@ -33,7 +33,7 @@ public class BadMonsterDaoC implements MonsterDao {
     @Override
     public List<Monster> getAllMonsters() {
         ArrayList<Monster> manyMonsters = new ArrayList<>();
-        for (Monster m : manyMonsters) {
+        for (Monster m : monsters.values()) { //Should be going through values.
             manyMonsters.add(m);
         }
         return manyMonsters;

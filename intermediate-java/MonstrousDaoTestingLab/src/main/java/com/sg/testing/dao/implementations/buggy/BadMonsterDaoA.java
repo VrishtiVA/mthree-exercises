@@ -18,7 +18,7 @@ public class BadMonsterDaoA implements MonsterDao {
     
     @Override
     public Monster addMonster(int i, Monster m) {
-        return monsters.put(id, m);
+        return monsters.put(i, m); //ID should be i
     }
 
     @Override

@@ -22,7 +22,10 @@ public class BadMonsterDaoE implements MonsterDao {
 
     @Override
     public Monster getMonster(int id) {
-       return monsters.remove(id);
+        return monsters.get(id);
+
+        //Omg no shouldn't remove. Add a test for not change.
+        //Should be get
     }
 
     @Override

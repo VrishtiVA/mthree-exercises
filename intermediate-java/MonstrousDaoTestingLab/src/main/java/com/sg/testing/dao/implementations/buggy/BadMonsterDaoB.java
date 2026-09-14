@@ -44,7 +44,7 @@ public class BadMonsterDaoB implements MonsterDao {
 
     @Override
     public Monster removeMonster(int id) {
-        Monster m = monsters.get(id);
+        Monster m = monsters.remove(id); //Should actually remove
         return m;
     }
     
