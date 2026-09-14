@@ -2,25 +2,34 @@ package mthree.academy.c458.vrishti.birthday_calculator;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.Period;
+import java.time.temporal.ChronoUnit;
 
-public class BirthdayCalculator implements BirthdayCalculatorOperations {
+public class BirthdayCalculator {
 
-    @Override
-    public DayOfWeek findDayOfWeekFromDate(LocalDate date) {
+    public static DayOfWeek findDayOfWeekFromDate(LocalDate date) {
         return date.getDayOfWeek();
     }
 
-    @Override
-    public DayOfWeek findDayOfWeekNextYearFromDate(LocalDate date) {
-        LocalDate thisYearsBirthday = LocalDate.of(LocalDate.now().getYear(), date.getMonth(), date.getDayOfMonth());
-        return thisYearsBirthday.getDayOfWeek();
+    public static LocalDate findDateThisYearFromDate(LocalDate date) {
+        int counter = 0;
+        do {
+            try {
+                LocalDate thisYearsDate = LocalDate.of(LocalDate.now().getYear() + counter, date.getMonth(), date.getDayOfMonth());
+                return thisYearsDate;
+            } catch (Exception e) {
+                counter ++;
+            }
+        } while (true);
     }
 
-    private LocalDate findNextBirthday(LocalDate date) {
+    public static DayOfWeek findDayOfWeekThisYearFromDate(LocalDate date) {
+        return findDateThisYearFromDate(date).getDayOfWeek();
+    }
+
+    public static LocalDate findNextDate(LocalDate date) {
 
         //Find next birthdate
-        LocalDate nextBirthday = LocalDate.of(LocalDate.now().getYear(), date.getMonth(), date.getDayOfMonth());
+        LocalDate nextBirthday = findDateThisYearFromDate(date);
         if (nextBirthday.isBefore(LocalDate.now())) {
             //Next birthday is next year.
             nextBirthday = nextBirthday.plusYears(1);
@@ -29,21 +38,19 @@ public class BirthdayCalculator implements BirthdayCalculatorOperations {
         return nextBirthday;
     }
 
-    @Override
-    public Period findPeriodToNextDate(LocalDate date) {
+    public static Long findDaysToNextDate(LocalDate date) {
 
         //Find next birthdate
-        LocalDate nextBirthday = findNextBirthday(date);
+        LocalDate nextDate = findNextDate(date);
 
         //Calculate Period
-        return LocalDate.now().until(nextBirthday);
+        return ChronoUnit.DAYS.between(LocalDate.now(), nextDate);
     }
 
-    @Override
-    public Integer findNextBirthdayAge(LocalDate birthday) {
+    public static Integer findNextBirthdayAge(LocalDate birthday) {
 
         //Find next birthday
-        LocalDate nextBirthday = findNextBirthday(birthday);
+        LocalDate nextBirthday = findNextDate(birthday);
 
         //Calculate age
         return birthday.until(nextBirthday).getYears();
