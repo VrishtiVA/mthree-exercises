@@ -5,6 +5,8 @@ import com.mthree.c458.vrishti.classroster.dao.ClassRosterDao;
 import com.mthree.c458.vrishti.classroster.dao.ClassRosterPersistenceException;
 import com.mthree.c458.vrishti.classroster.dto.Student;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,12 +25,17 @@ class ClassRosterServiceLayerImplTest {
     private ClassRosterServiceLayer service;
 
     public ClassRosterServiceLayerImplTest() {
+        //Dependency Injection
         //Stub daos to use to make service
         //Daos already got us set up.
-        ClassRosterDao dao = new ClassRosterDaoStubImpl();
-        ClassRosterAuditDao auditDao = new ClassRosterAuditDaoStubImpl();
+//        ClassRosterDao dao = new ClassRosterDaoStubImpl();
+//        ClassRosterAuditDao auditDao = new ClassRosterAuditDaoStubImpl();
         //Create service
-        this.service = new ClassRosterServiceLayerImpl(dao, auditDao);
+//        this.service = new ClassRosterServiceLayerImpl(dao, auditDao);
+
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        this.service = ctx.getBean("classRosterService", ClassRosterServiceLayer.class); //Interface type works here too
+
     }
 
     @Test

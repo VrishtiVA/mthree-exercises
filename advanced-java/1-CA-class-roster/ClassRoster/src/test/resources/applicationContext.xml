@@ -17,4 +17,16 @@
 
     <!-- Bean definitions go here -->
 
+    <!-- ClassRosterDao dao = new ClassRosterDaoStubImpl(); -->
+    <bean id="classRosterDaoStub" class="com.mthree.c458.vrishti.classroster.service.ClassRosterDaoStubImpl"/>
+
+    <!-- ClassRosterAuditDao auditDao = new ClassRosterAuditDaoStubImpl(); -->
+    <bean id="classRosterAuditDaoStub" class="com.mthree.c458.vrishti.classroster.service.ClassRosterAuditDaoStubImpl"/>
+
+    <!-- this.service = new ClassRosterServiceLayerImpl(dao, auditDao); -->
+    <bean id="classRosterService" class="com.mthree.c458.vrishti.classroster.service.ClassRosterServiceLayerImpl">
+        <constructor-arg ref="classRosterDaoStub"/>
+        <constructor-arg ref="classRosterAuditDaoStub"/>
+    </bean>
+    
 </beans>

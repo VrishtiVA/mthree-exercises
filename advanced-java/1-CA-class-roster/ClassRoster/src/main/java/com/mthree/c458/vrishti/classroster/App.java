@@ -10,18 +10,26 @@ import com.mthree.c458.vrishti.classroster.service.ClassRosterServiceLayerImpl;
 import com.mthree.c458.vrishti.classroster.ui.ClassRosterView;
 import com.mthree.c458.vrishti.classroster.ui.UserIO;
 import com.mthree.c458.vrishti.classroster.ui.UserIOConsoleImpl;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
 
     public static void main(String[] args) {
 
         //Decide implementations
-        UserIO myIo = new UserIOConsoleImpl();
-        ClassRosterView myView = new ClassRosterView(myIo);
-        ClassRosterDao myDao = new ClassRosterDaoFileImpl();
-        ClassRosterAuditDao myAuditDao = new ClassRosterAuditDaoFileImpl();
-        ClassRosterServiceLayer myService = new ClassRosterServiceLayerImpl(myDao, myAuditDao);
-        ClassRosterController controller = new ClassRosterController(myService, myView);
+//        UserIO myIo = new UserIOConsoleImpl();
+//        ClassRosterView myView = new ClassRosterView(myIo);
+//        ClassRosterDao myDao = new ClassRosterDaoFileImpl();
+//        ClassRosterAuditDao myAuditDao = new ClassRosterAuditDaoFileImpl();
+//        ClassRosterServiceLayer myService = new ClassRosterServiceLayerImpl(myDao, myAuditDao);
+//        ClassRosterController controller = new ClassRosterController(myService, myView);
+
+        //Instantiate application context / Spring DI container
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+
+        //Retrieve the controller from the application context / Spring DI controller
+        ClassRosterController controller = ctx.getBean("classRosterController", ClassRosterController.class);
 
         //Use controller to call the run method.
         controller.run();
