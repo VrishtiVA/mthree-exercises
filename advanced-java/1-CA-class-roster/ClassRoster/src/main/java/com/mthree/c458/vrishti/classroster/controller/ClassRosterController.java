@@ -1,0 +1,130 @@
+package com.mthree.c458.vrishti.classroster.controller;
+
+import com.mthree.c458.vrishti.classroster.dao.ClassRosterPersistenceException;
+import com.mthree.c458.vrishti.classroster.dto.Student;
+import com.mthree.c458.vrishti.classroster.service.ClassRosterDataValidationException;
+import com.mthree.c458.vrishti.classroster.service.ClassRosterDuplicateIdException;
+import com.mthree.c458.vrishti.classroster.service.ClassRosterServiceLayer;
+import com.mthree.c458.vrishti.classroster.ui.ClassRosterView;
+
+import java.util.List;
+
+/**
+ * This is the orchestrator of the application. It knows what needs to be done, when it needs to be done, and what component can do the job.
+ */
+public class ClassRosterController {
+
+    private ClassRosterView view;
+    private ClassRosterServiceLayer service;
+
+    public ClassRosterController(ClassRosterServiceLayer service, ClassRosterView view) {
+        this.service = service;
+        this.view = view;
+    }
+
+    /**
+     * Ask for user selection and route the request to a private controller method.
+     */
+    public void run() {
+
+        boolean keepGoing = true;
+        int menuSelection = 0;
+
+        try {
+            do {
+                //Take user menu choice
+                menuSelection = getMenuSelection();
+
+                //Action user choice
+                switch (menuSelection) {
+                    case 1:
+                        listStudents();
+                        break;
+                    case 2:
+                        createStudent();
+                        break;
+                    case 3:
+                        viewStudent();
+                        break;
+                    case 4:
+                        removeStudent();
+                        break;
+                    case 5:
+                        keepGoing = false;
+                        break;
+                    default:
+                        unknownCommand();
+                }
+            } while (keepGoing);
+
+            exitMessage();
+
+        } catch (ClassRosterPersistenceException e) {
+            view.displayErrorMessage(e.getMessage());
+        }
+
+    }
+
+    private int getMenuSelection() {
+        return view.printMenuAndGetSelection();
+    }
+
+    private void createStudent() throws ClassRosterPersistenceException {
+        view.displayCreateStudentBanner();
+
+        boolean hasErrors = false;
+        do {
+            //Fetch new student from user
+            Student newStudent = view.getNewStudentInfo();
+            try {
+                //Validate and store the new student
+                service.createStudent(newStudent);
+                //Feedback to the user
+                view.displayCreateStudentSuccessBanner();
+                //If reached here, success.
+                hasErrors = false;
+
+            } catch (ClassRosterDuplicateIdException | ClassRosterDataValidationException e) {
+                hasErrors = true;
+                view.displayErrorMessage(e.getMessage());
+            }
+        } while (hasErrors);
+    }
+
+    private void listStudents() throws ClassRosterPersistenceException {
+        view.displayDisplayAllBanner();
+        //Fetch list of all students
+        List<Student> studentList = service.getAllStudents();
+        //Display them
+        view.displayStudentList(studentList);
+    }
+
+    private void viewStudent() throws ClassRosterPersistenceException {
+        view.displayStudentBanner();
+        //Fetch student ID choice
+        String studentId = view.getStudentIdChoice();
+        //Get student
+        Student student = service.getStudent(studentId);
+        //Display student
+        view.displayStudent(student);
+    }
+
+    private void removeStudent() throws ClassRosterPersistenceException {
+        view.displayRemoveStudentBanner();
+        //Fetch student ID choice
+        String studentId = view.getStudentIdChoice();
+        //Remove student
+        Student removedStudent = service.removeStudent(studentId);
+        //Check if was removed, by knowing if above returned a student.
+        view.displayRemoveResult(removedStudent);
+    }
+
+    private void unknownCommand() {
+        view.displayUnknownCommandBanner();
+    }
+
+    private void exitMessage() {
+        view.displayExitBanner();
+    }
+
+}
