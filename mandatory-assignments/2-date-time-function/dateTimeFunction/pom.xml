@@ -8,7 +8,7 @@
   <artifactId>dateTimeFunction</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>dateTimeFunction</name>
+  <name>dateTimeFunction</name> 
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
