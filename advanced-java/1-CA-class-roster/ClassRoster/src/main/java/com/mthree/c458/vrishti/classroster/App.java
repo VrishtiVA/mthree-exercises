@@ -21,12 +21,9 @@ public class App {
         ClassRosterDao myDao = new ClassRosterDaoFileImpl();
         ClassRosterAuditDao myAuditDao = new ClassRosterAuditDaoFileImpl();
         ClassRosterServiceLayer myService = new ClassRosterServiceLayerImpl(myDao, myAuditDao);
+        ClassRosterController controller = new ClassRosterController(myService, myView);
 
         //Use controller to call the run method.
-        ClassRosterController controller = new ClassRosterController(
-            myService,
-            myView
-        );
         controller.run();
 
     }
