@@ -8,7 +8,7 @@ public class DVD {
     private long id;
     private String title;
     private String releaseDate;
-    private float mpaaRating;
+    private String mpaaRating;
     private String directorName;
     private String Studio;
     private String userRatingNote; //allows the user to enter additional information, e.g., "Good family movie"
@@ -23,7 +23,7 @@ public class DVD {
     public long getId() {return id;}
     public String getTitle() {return title;}
     public String getReleaseDate() {return releaseDate;}
-    public float getMpaaRating() {return mpaaRating;}
+    public String getMpaaRating() {return mpaaRating;}
     public String getDirectorName() {return directorName;}
     public String getStudio() {return Studio;}
     public String getUserRatingNote() {return userRatingNote;}
@@ -31,7 +31,7 @@ public class DVD {
     //Setters
     public void setTitle(String title) {this.title = title;}
     public void setReleaseDate(String releaseDate) {this.releaseDate = releaseDate;}
-    public void setMpaaRating(float mpaaRating) {this.mpaaRating = mpaaRating;}
+    public void setMpaaRating(String mpaaRating) {this.mpaaRating = mpaaRating;}
     public void setDirectorName(String directorName) {this.directorName = directorName;}
     public void setStudio(String studio) {Studio = studio;}
     public void setUserRatingNote(String userRatingNote) {this.userRatingNote = userRatingNote;}

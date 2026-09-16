@@ -45,10 +45,10 @@ public interface DVDLibraryDao {
     public DVD getDVD(long id);
 
     /**
-     * Allow the user to search for a DVD by title.
+     * Allow the user to search for DVDs by title.
      *
-     * Get DVD by title
+     * Return matching DVDs
      */
-    public DVD findDVDByTitle(String title);
+    public List<DVD> findDVDsByTitle(String title);
 
 }
