@@ -1,6 +1,7 @@
 package mthree.academy.c458.vrishti.dvd_library.dao;
 
 import mthree.academy.c458.vrishti.dvd_library.dto.DVD;
+import mthree.academy.c458.vrishti.dvd_library.service.DVDLibraryPersistenceException;
 
 import java.io.*;
 import java.util.*;
@@ -28,6 +29,7 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
 
     @Override
     public DVD addDVD(DVD dvd) {
+        loadDVDs();
         DVD previousDVD = dvdMap.put(dvd.getId(), dvd);
         saveDVDs();
         return previousDVD;
@@ -35,6 +37,7 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
 
     @Override
     public DVD removeDVD(long id) {
+        loadDVDs();
         DVD removedDVD = dvdMap.remove(id);
         saveDVDs();
         return removedDVD;
@@ -42,6 +45,7 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
 
     @Override
     public DVD editDVD(long id, DVD edittedDVD) {
+        loadDVDs();
         DVD replacedDVD = dvdMap.replace(id, edittedDVD);
         saveDVDs();
         return replacedDVD;
@@ -49,16 +53,19 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
 
     @Override
     public List<DVD> getDVDs() {
+        loadDVDs();
         return new ArrayList<>(dvdMap.values());
     }
 
     @Override
     public DVD getDVD(long id) {
+        loadDVDs();
         return dvdMap.get(id);
     }
 
     @Override
     public List<DVD> findDVDsByTitle(String title) {
+        loadDVDs();
 
         List<DVD> matchingResults = new ArrayList<>();
 

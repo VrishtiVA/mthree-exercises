@@ -23,7 +23,7 @@ public class DVDLibraryView {
                 "\n6. Search for DVDs" +
                 "\n7. Quit"
         );
-        return userIO.readInt("Your selection : ", 1, 7);
+        return userIO.readInt("Your selection (#) : ", 1, 7);
     }
 
     public void printEnterToProceed() {
@@ -176,5 +176,9 @@ public class DVDLibraryView {
 
     public String getDVDTitle() {
         return userIO.readString("Search for DVDs by Title : ");
+    }
+
+    public void displayErrorMessage(String message) {
+        userIO.print("\nError: " + message);
     }
 }

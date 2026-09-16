@@ -1,4 +1,4 @@
-package mthree.academy.c458.vrishti.dvd_library.dao;
+package mthree.academy.c458.vrishti.dvd_library.service;
 
 public class DVDLibraryPersistenceException extends RuntimeException {
 

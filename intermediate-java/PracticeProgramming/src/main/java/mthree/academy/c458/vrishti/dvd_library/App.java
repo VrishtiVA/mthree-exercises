@@ -3,6 +3,8 @@ package mthree.academy.c458.vrishti.dvd_library;
 import mthree.academy.c458.vrishti.dvd_library.controller.DVDLibraryController;
 import mthree.academy.c458.vrishti.dvd_library.dao.DVDLibraryDao;
 import mthree.academy.c458.vrishti.dvd_library.dao.DVDLibraryDaoFileImpl;
+import mthree.academy.c458.vrishti.dvd_library.service.DVDLibraryService;
+import mthree.academy.c458.vrishti.dvd_library.service.DVDLibraryServiceImpl;
 import mthree.academy.c458.vrishti.dvd_library.ui.DVDLibraryView;
 import mthree.academy.c458.vrishti.dvd_library.ui.UserIOConsoleImpl;
 
@@ -13,7 +15,8 @@ public class App {
         //Instantiate components
         DVDLibraryView view = new DVDLibraryView(new UserIOConsoleImpl());
         DVDLibraryDao dao = new DVDLibraryDaoFileImpl("dvd-library.txt");
-        DVDLibraryController controller = new DVDLibraryController(view, dao);
+        DVDLibraryService service = new DVDLibraryServiceImpl(dao);
+        DVDLibraryController controller = new DVDLibraryController(view, service);
 
         //Call run method from controller to start application
         controller.run();
