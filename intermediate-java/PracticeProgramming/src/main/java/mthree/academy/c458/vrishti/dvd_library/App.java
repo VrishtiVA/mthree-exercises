@@ -12,7 +12,7 @@ public class App {
 
         //Instantiate components
         DVDLibraryView view = new DVDLibraryView(new UserIOConsoleImpl());
-        DVDLibraryDao dao = new DVDLibraryDaoFileImpl();
+        DVDLibraryDao dao = new DVDLibraryDaoFileImpl("dvd-library.txt");
         DVDLibraryController controller = new DVDLibraryController(view, dao);
 
         //Call run method from controller to start application
