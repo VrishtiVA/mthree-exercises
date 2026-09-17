@@ -1,5 +1,7 @@
 package mthree.academy.c458.vrishti.dvd_library.ui;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -255,13 +257,60 @@ public class UserIOConsoleImpl implements UserIO {
                 }
 
             } catch (InputMismatchException | IllegalArgumentException e) {
-                //Added comma separators
+                //Added comma separators in long numbers
                 System.out.printf("Invalid input, it should be %,d <= x <= %,d. Please try again.\n", min, max);
                 continue; //Failed format so retry
 
             } finally {
                 //Absorb rest of line to prevent problems for subsequent reads.
                 this.inputReader.nextLine();
+            }
+
+            //If reached here, return valid input.
+            return userInput;
+
+        } while (true);
+    }
+
+    @Override
+    public LocalDate readDate(String prompt, boolean isOptional, LocalDate min, LocalDate max) {
+
+        //Desired input
+        LocalDate userInput;
+        String userInputString;
+
+        //Keep trying until valid input
+        do {
+            try {
+                //Accept user input after prompt
+                System.out.print(prompt);
+                userInputString = this.inputReader.nextLine().trim();
+
+                //Handle if optional
+                if (isOptional) {
+                    userInput = userInputString.isBlank() ? null : LocalDate.parse(userInputString, DATE_FORMAT);
+                } else {
+                    userInput = LocalDate.parse(userInputString, DATE_FORMAT);
+                }
+                //If provided null since optional, escape now with null
+                if (userInput == null) return null;
+
+                //Range check
+                if ((min != null && userInput.isBefore(min)) || (min != null && userInput.isAfter(max))) {
+                    throw new IllegalArgumentException();
+                }
+
+            } catch (DateTimeParseException | IllegalArgumentException e) {
+                if (min != null && max != null) {
+                    System.out.printf("Invalid input, it should be a valid date in dd-MM-yyyy format between %s and %s. Please try again.\n", min, max);
+                } else if (min != null) {
+                    System.out.printf("Invalid input, it should be a valid date in dd-MM-yyyy format after %s. Please try again.\n", min);
+                } else if (max != null ){
+                    System.out.printf("Invalid input, it should be a valid date in dd-MM-yyyy format before %s. Please try again.\n", max);
+                } else {
+                    System.out.println("Invalid input, it should be a valid date in dd-MM-yyyy format");
+                }
+                continue;
             }
 
             //If reached here, return valid input.

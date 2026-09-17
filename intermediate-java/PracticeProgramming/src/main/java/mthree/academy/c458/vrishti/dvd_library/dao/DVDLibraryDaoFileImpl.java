@@ -4,6 +4,7 @@ import mthree.academy.c458.vrishti.dvd_library.dto.DVD;
 import mthree.academy.c458.vrishti.dvd_library.service.DVDLibraryPersistenceException;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.*;
 
 public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
@@ -84,7 +85,7 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
     private String marshallDVD(DVD dvd) {
         return dvd.getId() + DELIMITER +
             (dvd.getTitle().isBlank() ? " " : dvd.getTitle()) + DELIMITER +
-            (dvd.getReleaseDate().isBlank() ? " " : dvd.getReleaseDate()) + DELIMITER +
+            (dvd.getReleaseDate() == null ? " " : dvd.getReleaseDate()) + DELIMITER +
             (dvd.getMpaaRating().isBlank() ? " " : dvd.getMpaaRating()) + DELIMITER +
             (dvd.getDirectorName().isBlank() ? " " : dvd.getDirectorName()) + DELIMITER +
             (dvd.getStudio().isBlank() ? " " : dvd.getStudio()) + DELIMITER +
@@ -99,7 +100,7 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
         //Rebuild DVD
         DVD dvd = new DVD(Long.parseLong(dvdLine[0]));
         dvd.setTitle(dvdLine[1].trim());
-        dvd.setReleaseDate(dvdLine[2].trim());
+        dvd.setReleaseDate(dvdLine[2].isBlank() ? null : LocalDate.parse(dvdLine[2].trim()));
         dvd.setMpaaRating(dvdLine[3].trim());
         dvd.setDirectorName(dvdLine[4].trim());
         dvd.setStudio(dvdLine[5].trim());

@@ -2,6 +2,7 @@ package mthree.academy.c458.vrishti.dvd_library.ui;
 
 import mthree.academy.c458.vrishti.dvd_library.dto.DVD;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class DVDLibraryView {
@@ -56,7 +57,7 @@ public class DVDLibraryView {
         //Collect inputs
         long id = userIO.readLong("Enter DVD Id : ");
         String title = userIO.readString("Enter Title of DVD : ");
-        String releaseDate = userIO.readString("Enter Release Date of DVD : ");
+        LocalDate releaseDate = userIO.readDate("Enter Release Date of DVD : ", true, null, null);
         String mpaaRating = userIO.readString("Enter MPAA Rating of DVD : ");
         String directorName = userIO.readString("Enter DVD Directors Name : ");
         String studio = userIO.readString("Enter DVD Studio : ");
@@ -95,7 +96,7 @@ public class DVDLibraryView {
         userIO.print(
             "\n- Id: " + dvd.getId() +
             "\n- Title: " + dvd.getTitle() +
-            "\n- Release Date: " + dvd.getReleaseDate() +
+            "\n- Release Date: " + dvd.getReleaseDate().format(UserIO.DATE_FORMAT) +
             "\n- MPAA Rating: " + dvd.getMpaaRating() +
             "\n- Director: " + dvd.getDirectorName() +
             "\n- Studio: " + dvd.getStudio() +
@@ -115,7 +116,7 @@ public class DVDLibraryView {
 
         //Collect edits
         String title = userIO.readString("Enter Title of DVD (" + currentDVD.getTitle() + "): ");
-        String releaseDate = userIO.readString("Enter Release Date of DVD (" + currentDVD.getReleaseDate() + "): ");
+        LocalDate releaseDate = userIO.readDate("Enter Release Date of DVD (" + currentDVD.getReleaseDate() + "): ", true,null, null);
         String mpaaRating = userIO.readString("Enter MPAA Rating of DVD (" + currentDVD.getMpaaRating() + "): ");
         String directorName = userIO.readString("Enter DVD Directors Name (" + currentDVD.getDirectorName() + "): ");
         String studio = userIO.readString("Enter DVD Studio (" + currentDVD.getStudio() + "): ");
@@ -124,7 +125,7 @@ public class DVDLibraryView {
         //Build editted DVD object
         DVD edittedDVD = new DVD(currentDVD.getId());
         edittedDVD.setTitle( title.isBlank() ? currentDVD.getTitle() : title );
-        edittedDVD.setReleaseDate( releaseDate.isBlank() ? currentDVD.getReleaseDate() : releaseDate );
+        edittedDVD.setReleaseDate( releaseDate == null ? currentDVD.getReleaseDate() : releaseDate );
         edittedDVD.setMpaaRating( mpaaRating.isBlank() ? currentDVD.getMpaaRating() : mpaaRating );
         edittedDVD.setDirectorName( directorName.isBlank() ? currentDVD.getDirectorName() : directorName );
         edittedDVD.setStudio( studio.isBlank() ? currentDVD.getStudio() : studio );

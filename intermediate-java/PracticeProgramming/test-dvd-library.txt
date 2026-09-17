@@ -1,2 +1,2 @@
-1::Harry Potter 1::16-11-2001::PG::Chris Columbus::Warner Bros:: ::
-2::Harry Potter and the Chamber of Secrets::15-11-2002::PG::Chris Columbus::Warner Bros:: ::
+1::Harry Potter 1::2001-11-16::PG::Chris Columbus::Warner Bros:: ::
+2::Harry Potter and the Chamber of Secrets::2002-11-15::PG::Chris Columbus::Warner Bros:: ::

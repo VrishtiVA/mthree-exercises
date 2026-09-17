@@ -1,6 +1,11 @@
 package mthree.academy.c458.vrishti.dvd_library.ui;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public interface UserIO {
+
+    public DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     /**
      * Print a given String to the console.
@@ -92,4 +97,13 @@ public interface UserIO {
      */
     long readLong(String prompt, long min, long max);
 
+    /**
+     * Display a prompt to the user to enter a date between a specified min and max range,
+     * and read in a date.
+     * @param prompt The prompt message.
+     * @param min The earliest valid date (inclusive). If not provided, allow earlier dates.
+     * @param max The latest valid date (exclusive). If not provided, allow later dates.
+     * @return The corresponding local date read in from the console.
+     */
+    LocalDate readDate(String prompt, boolean isOptional, LocalDate min, LocalDate max);
 }

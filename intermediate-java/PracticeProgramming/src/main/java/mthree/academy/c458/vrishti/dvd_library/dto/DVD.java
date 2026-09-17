@@ -8,7 +8,7 @@ public class DVD {
     //Attributes
     private long id;
     private String title;
-    private String releaseDate;
+    private LocalDate releaseDate;
     private String mpaaRating;
     private String directorName;
     private String Studio;
@@ -23,7 +23,7 @@ public class DVD {
     //Getters
     public long getId() {return id;}
     public String getTitle() {return title;}
-    public String getReleaseDate() {return releaseDate;}
+    public LocalDate getReleaseDate() {return releaseDate;}
     public String getMpaaRating() {return mpaaRating;}
     public String getDirectorName() {return directorName;}
     public String getStudio() {return Studio;}
@@ -31,7 +31,7 @@ public class DVD {
 
     //Setters
     public void setTitle(String title) {this.title = title;}
-    public void setReleaseDate(String releaseDate) {this.releaseDate = releaseDate;}
+    public void setReleaseDate(LocalDate releaseDate) {this.releaseDate = releaseDate;}
     public void setMpaaRating(String mpaaRating) {this.mpaaRating = mpaaRating;}
     public void setDirectorName(String directorName) {this.directorName = directorName;}
     public void setStudio(String studio) {Studio = studio;}
