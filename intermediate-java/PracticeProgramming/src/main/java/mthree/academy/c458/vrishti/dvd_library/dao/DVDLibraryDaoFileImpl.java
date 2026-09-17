@@ -4,8 +4,12 @@ import mthree.academy.c458.vrishti.dvd_library.dto.DVD;
 import mthree.academy.c458.vrishti.dvd_library.service.DVDLibraryPersistenceException;
 
 import java.io.*;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
 
@@ -68,18 +72,76 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
     public List<DVD> findDVDsByTitle(String title) {
         loadDVDs();
 
-        List<DVD> matchingResults = new ArrayList<>();
+        //Filter to only DVDs matching title and return
+        return getDVDs().stream()
+                .filter(dvd -> dvd.getTitle().toUpperCase().contains(title.toUpperCase()))
+                .collect(Collectors.toList());
+    }
 
-        //Go through all DVDs
-        for (DVD dvd : dvdMap.values()) {
+    @Override
+    public List<DVD> findDVDsUnderNYearsOld(int nYears) {
 
-            //Add DVD if title fits
-            if (dvd.getTitle().toUpperCase().contains(title.toUpperCase())) {
-                matchingResults.add(dvd);
-            }
-        }
+        return getDVDs().stream()
+                .filter(dvd -> dvd.getReleaseDate().isAfter(LocalDate.now().minusYears(nYears)))
+                .collect(Collectors.toList());
+    }
 
-        return matchingResults;
+    @Override
+    public List<DVD> findDVDsByMpaaRating(String mpaaRating) {
+
+        return getDVDs().stream()
+                .filter(dvd -> dvd.getMpaaRating().equalsIgnoreCase(mpaaRating))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Map<String, List<DVD>> findDVDsByDirector(String directorName) {
+
+        return getDVDs().stream()
+                .filter(dvd -> dvd.getDirectorName().equalsIgnoreCase(directorName))
+                .collect(Collectors.groupingBy(DVD::getMpaaRating)); //Grouping lambda equivalent to `dvd -> dvd.getMpaaRating()`
+    }
+
+    @Override
+    public List<DVD> findDVDsByStudio(String studio) {
+
+        return getDVDs().stream()
+                .filter(dvd -> dvd.getStudio().equalsIgnoreCase(studio))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Integer getDVDsAverageAgeInDays() {
+
+        //Find average age in number of days - OptionalDouble type since DVDs could be empty.
+        OptionalDouble averageDays = getDVDs().stream()
+                .mapToLong(dvd -> ChronoUnit.DAYS.between(dvd.getReleaseDate(), LocalDate.now()))
+                .average();
+
+        if (averageDays.isPresent()) {
+            return (int) Math.ceil(averageDays.getAsDouble());
+
+        } else return null;
+    }
+
+    @Override
+    public DVD getNewestDVD() {
+        return getDVDs().stream()
+                .min((a, b) ->
+                        a.getReleaseDate().isBefore(b.getReleaseDate()) ? 1
+                        : a.getReleaseDate().isEqual(b.getReleaseDate()) ? 0
+                        : -1
+                ).orElse(null);
+    }
+
+    @Override
+    public DVD getOldestDVD() {
+        return getDVDs().stream()
+                .max((a, b) ->
+                        a.getReleaseDate().isBefore(b.getReleaseDate()) ? 1
+                                : a.getReleaseDate().isEqual(b.getReleaseDate()) ? 0
+                                : -1
+                ).orElse(null);
     }
 
     private String marshallDVD(DVD dvd) {

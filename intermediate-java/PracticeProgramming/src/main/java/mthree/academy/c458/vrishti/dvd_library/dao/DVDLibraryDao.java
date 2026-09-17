@@ -3,6 +3,7 @@ package mthree.academy.c458.vrishti.dvd_library.dao;
 import mthree.academy.c458.vrishti.dvd_library.dto.DVD;
 
 import java.util.List;
+import java.util.Map;
 
 public interface DVDLibraryDao {
 
@@ -50,5 +51,47 @@ public interface DVDLibraryDao {
      * Return matching DVDs
      */
     public List<DVD> findDVDsByTitle(String title);
+
+    /**
+     * Find all movies released in the last N years.
+     */
+    public List<DVD> findDVDsUnderNYearsOld(int nYears);
+
+    /**
+     * Find all the movies with a given MPAA rating.
+     */
+    public List<DVD> findDVDsByMpaaRating(String mpaaRating);
+
+    /**
+     * Find all the movies by a given director.
+     * When searching by director, the movies should be sorted into separate data structures by MPAA rating.
+     */
+    public Map<String, List<DVD>> findDVDsByDirector(String directorName);
+
+    /**
+     * Find all the movies released by a particular studio.
+     */
+    public List<DVD> findDVDsByStudio(String studio);
+
+    /**
+     * Find the average age of the movies in the collection.
+     *
+     * @return null if empty
+     */
+    public Integer getDVDsAverageAgeInDays();
+
+    /**
+     * Find the newest movie in your collection.
+     *
+     * @return null if no DVDs
+     */
+    public DVD getNewestDVD();
+
+    /**
+     * Find the oldest movie in your collection.
+     *
+     * @return null if no DVDs
+     */
+    public DVD getOldestDVD();
 
 }

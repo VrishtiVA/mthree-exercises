@@ -4,6 +4,7 @@ import mthree.academy.c458.vrishti.dvd_library.dto.DVD;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 public class DVDLibraryView {
 
@@ -21,10 +22,26 @@ public class DVDLibraryView {
                 "\n3. Edit DVD" +
                 "\n4. List DVDs" +
                 "\n5. View DVD" +
-                "\n6. Search for DVDs" +
-                "\n7. Quit"
+                "\n6. Search for DVDs (by Title)" +
+                "\n7. More Options" +
+                "\n8. Quit"
         );
         return userIO.readInt("Your selection (#) : ", 1, 7);
+    }
+
+    public int printAndGetSubMenuSelection() {
+        userIO.print(
+            "\nSelect an option:" +
+            "\n1. Find all DVDs released in the last N years" +
+            "\n2. Find all DVDs with a given MPAA Rating" +
+            "\n3. Find all DVDs with a given Director" +
+            "\n4. Find all DVDs released by a particular Studio" +
+            "\n5. Find average age of DVDs in library" +
+            "\n6. Find newest DVD in library" +
+            "\n7. Find oldest DVD in library" +
+            "\n8. Go back"
+        );
+        return userIO.readInt("Your selection (#) : ", 1, 8);
     }
 
     public void printEnterToProceed() {
@@ -39,6 +56,10 @@ public class DVDLibraryView {
         userIO.print("Good Bye!");
     }
 
+    public void displayErrorMessage(String message) {
+        userIO.print("\nError: " + message);
+    }
+
     //Display Banner Methods
     public void displayAddDvdBanner() { userIO.print("\n=== Add DVD ==="); }
     public void displayRemoveDvdBanner() { userIO.print("\n=== Remove DVD ==="); }
@@ -46,6 +67,9 @@ public class DVDLibraryView {
     public void displayListDvdsBanner() { userIO.print("\n=== List DVDs ==="); }
     public void displayViewDvdBanner() { userIO.print("\n=== View DVD ==="); }
     public void displaySearchForDvdBanner() { userIO.print("\n=== Find DVDs ==="); }
+    public void displayAvgDvdAgeBanner() { userIO.print("\n=== Average DVD Age ==="); }
+    public void displayOldestDvdBanner() { userIO.print("\n=== Oldest DVD ==="); }
+    public void displayNewestDvdBanner() { userIO.print("\n=== Newest DVD ==="); }
 
     //Display Operation Completed Methods
     public void displayAddDvdCompleted() { userIO.print("\nDVD has been added."); }
@@ -76,17 +100,18 @@ public class DVDLibraryView {
         return newDVD;
     }
 
-    public long getDVDId() {
-        return userIO.readLong("Enter DVD Id : ");
-    }
-
     public void displayNoSuchIdWarning(long id) {
         userIO.print("\nNo DVD with Id " + id + " exists.");
     }
 
-    public void displayNoSearchResultsWarning(String title) {
+    public void displayEmptyDVDLibraryWarning() {
+        userIO.print("\nThe DVD library is currently empty.");
+    }
+
+    public void displayNoTitleSearchResultsWarning(String title) {
         userIO.print("\nNo DVDs with titles matching \"" + title + "\" exist.");
     }
+
 
     public void displayOperationAbandoned() {
         userIO.print("\nOperation has been abandoned.");
@@ -175,11 +200,39 @@ public class DVDLibraryView {
         userIO.print("");
     }
 
-    public String getDVDTitle() {
+    public void displayDVDAvgAgeInDays(Integer ageInDays) {
+        userIO.print("The average age of DVDs in the library is: " + ageInDays + " days.");
+    }
+
+    public long getDVDId() {
+        return userIO.readLong("Enter DVD Id : ");
+    }
+
+    public String getDVDSearchTitle() {
         return userIO.readString("Search for DVDs by Title : ");
     }
 
-    public void displayErrorMessage(String message) {
-        userIO.print("\nError: " + message);
+    public int getDVDSearchLastNYears() {
+        return userIO.readInt("Search for DVDs in Last N Years (Enter N) : ");
+    }
+
+    public String getDVDSearchMpaaRating() {
+        return userIO.readString("Search for DVDs by MPAA Rating : ");
+    }
+
+    public String getDVDSearchDirector() {
+        return userIO.readString("Search for DVDs by Director : ");
+    }
+
+    public String getDVDSearchStudio() {
+        return userIO.readString("Search for DVDs by Studio : ");
+    }
+
+    public void displayDVDsByMpaaRating(Map<String, List<DVD>> groupedDVDs) {
+
+        for (String mpaaRating : groupedDVDs.keySet()) {
+            userIO.print("\nMPAA Rating: " + mpaaRating);
+            displayDVDs(groupedDVDs.get(mpaaRating));
+        }
     }
 }

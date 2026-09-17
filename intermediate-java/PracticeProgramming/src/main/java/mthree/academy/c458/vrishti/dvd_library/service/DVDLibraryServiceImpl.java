@@ -4,6 +4,7 @@ import mthree.academy.c458.vrishti.dvd_library.dao.DVDLibraryDao;
 import mthree.academy.c458.vrishti.dvd_library.dto.DVD;
 
 import java.util.List;
+import java.util.Map;
 
 public class DVDLibraryServiceImpl implements DVDLibraryService {
 
@@ -61,6 +62,41 @@ public class DVDLibraryServiceImpl implements DVDLibraryService {
         validateDVDInformation(edittedDVD);
         //Apply edits
         return dao.editDVD(id, edittedDVD);
+    }
+
+    @Override
+    public List<DVD> findDVDsUnderNYearsOld(int nYears) {
+        return dao.findDVDsUnderNYearsOld(nYears);
+    }
+
+    @Override
+    public List<DVD> findDVDsByMpaaRating(String mpaaRating) {
+        return dao.findDVDsByMpaaRating(mpaaRating);
+    }
+
+    @Override
+    public Map<String, List<DVD>> findDVDsByDirector(String directorName) {
+        return dao.findDVDsByDirector(directorName);
+    }
+
+    @Override
+    public List<DVD> findDVDsByStudio(String studio) {
+        return dao.findDVDsByStudio(studio);
+    }
+
+    @Override
+    public Integer getDVDsAverageAgeInDays() {
+        return dao.getDVDsAverageAgeInDays();
+    }
+
+    @Override
+    public DVD getNewestDVD() {
+        return dao.getNewestDVD();
+    }
+
+    @Override
+    public DVD getOldestDVD() {
+        return dao.getOldestDVD();
     }
 
 }
