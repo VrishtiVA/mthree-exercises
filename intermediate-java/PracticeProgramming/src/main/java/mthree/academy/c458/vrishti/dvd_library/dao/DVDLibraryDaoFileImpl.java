@@ -83,12 +83,12 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
 
     private String marshallDVD(DVD dvd) {
         return dvd.getId() + DELIMITER +
-            dvd.getTitle() + DELIMITER +
-            dvd.getReleaseDate() + DELIMITER +
-            dvd.getMpaaRating() + DELIMITER +
-            dvd.getDirectorName() + DELIMITER +
-            dvd.getStudio() + DELIMITER +
-            dvd.getUserRatingNote();
+            (dvd.getTitle().isBlank() ? " " : dvd.getTitle()) + DELIMITER +
+            (dvd.getReleaseDate().isBlank() ? " " : dvd.getReleaseDate()) + DELIMITER +
+            (dvd.getMpaaRating().isBlank() ? " " : dvd.getMpaaRating()) + DELIMITER +
+            (dvd.getDirectorName().isBlank() ? " " : dvd.getDirectorName()) + DELIMITER +
+            (dvd.getStudio().isBlank() ? " " : dvd.getStudio()) + DELIMITER +
+            (dvd.getUserRatingNote().isBlank() ? " " : dvd.getUserRatingNote()) + DELIMITER; //Some fields could be empty, so need to careful
     }
 
     private DVD unmarshallDVD(String dvdString) {
@@ -98,12 +98,12 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
 
         //Rebuild DVD
         DVD dvd = new DVD(Long.parseLong(dvdLine[0]));
-        dvd.setTitle(dvdLine[1]);
-        dvd.setReleaseDate(dvdLine[2]);
-        dvd.setMpaaRating(dvdLine[3]);
-        dvd.setDirectorName(dvdLine[4]);
-        dvd.setStudio(dvdLine[5]);
-        dvd.setUserRatingNote(dvdLine[6]);
+        dvd.setTitle(dvdLine[1].trim());
+        dvd.setReleaseDate(dvdLine[2].trim());
+        dvd.setMpaaRating(dvdLine[3].trim());
+        dvd.setDirectorName(dvdLine[4].trim());
+        dvd.setStudio(dvdLine[5].trim());
+        dvd.setUserRatingNote(dvdLine[6].trim());
 
         //Return DVD
         return dvd;
