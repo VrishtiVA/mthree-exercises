@@ -1,6 +1,8 @@
 package com.sg.booktracker.dao;
 
 import com.sg.booktracker.dto.Book;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +10,7 @@ import java.util.List;
  *
  * @author Kyle David Rudy
  */
+@Component
 public class BookDaoMemoryImpl implements BookDao {
     
     private List<Book> books = new ArrayList<>();

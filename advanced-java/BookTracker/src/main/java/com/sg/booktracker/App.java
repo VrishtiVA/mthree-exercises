@@ -7,6 +7,7 @@ import com.sg.booktracker.service.BookService;
 import com.sg.booktracker.ui.BookView;
 import com.sg.booktracker.ui.UserIO;
 import com.sg.booktracker.ui.UserIOConsoleImpl;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
  *
@@ -14,13 +15,21 @@ import com.sg.booktracker.ui.UserIOConsoleImpl;
  */
 public class App {
     public static void main(String[] args) {
-        UserIO io = new UserIOConsoleImpl();
-        BookView view = new BookView(io);
-        
-        BookDao dao = new BookDaoMemoryImpl();
-        BookService service = new BookService(dao);
-        
-        BookController controller = new BookController(service, view);
+
+//        UserIO io = new UserIOConsoleImpl();
+//        BookView view = new BookView(io);
+//
+//        BookDao dao = new BookDaoMemoryImpl();
+//        BookService service = new BookService(dao);
+//
+//        BookController controller = new BookController(service, view);
+
+        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
+        applicationContext.scan("com.sg.booktracker");
+        applicationContext.refresh();
+
+        BookController controller = applicationContext.getBean("bookController", BookController.class);
+
         controller.run();
     }
 }
