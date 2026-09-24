@@ -4,8 +4,6 @@ import java.util.*;
 
 public class RockPaperScissors {
 
-
-
     public static void main(String[] args) {
 
         //Constants
@@ -181,7 +179,7 @@ public class RockPaperScissors {
                 return number;
 
             } catch (InputMismatchException ex) { //Using the exception thrown by scanner nextInt()
-                System.out.printf("Invalid input. The input should be a number in range %d <= x < %d.\n", lowerBound, upperBound);
+                System.out.printf("Invalid input. The input should be a number in range %d <= x <= %d.\n", lowerBound, upperBound);
             } finally {
                 //Ensuring full line was read so can move on, preventing issues in subsequent reads.
                 inputReader.nextLine();
