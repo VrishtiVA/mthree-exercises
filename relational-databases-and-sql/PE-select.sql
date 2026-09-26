@@ -120,7 +120,7 @@ DESCRIBE Client;
 DESCRIBE Login;
 
 SELECT 
-	Client.ClientId,
+	Client.ClientId, -- Has to be qualified otherwise don't know which.
 	Client.FirstName,
     Client.LastName,
     Login.EmailAddress
