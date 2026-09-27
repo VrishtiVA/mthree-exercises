@@ -11,7 +11,7 @@
 	<groupId>mthree.com</groupId>
 	<artifactId>SchoolDatabase</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SchoolDatabase</name>
+	<name>SchoolDatabase</name> 
 	<description>School App for DB assessment</description>
 	<url/>
 	<licenses>
