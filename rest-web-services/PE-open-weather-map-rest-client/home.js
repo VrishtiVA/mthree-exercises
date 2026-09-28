@@ -1,4 +1,9 @@
 
+//Get API Keys
+const apiKeyFile = await fetch("./apiKey.json");
+const apiKeys = await apiKeyFile.json();
+const openWeatherAPIKey = apiKeys["open-weather-api-key"];
+
 function validateZipCode(zipCode) {
     
     //No zip code, then invalid.
@@ -14,11 +19,18 @@ function validateZipCode(zipCode) {
     }
 }
 
+function getCurrentConditions(zipCode, units) {
+
+}
+
+function getFiveDayForecast(zipCode, units) {
+
+}
+
 //Once file ready
 $(document).ready(() => {
     
     $("#weatherFeedbackAlert").hide();
-
 })
 
 //Alright for now.
