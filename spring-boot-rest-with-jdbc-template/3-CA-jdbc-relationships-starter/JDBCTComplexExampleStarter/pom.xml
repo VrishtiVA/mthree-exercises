@@ -15,7 +15,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
-            <version>2.0.5.RELEASE</version>
+            <version>4.0.0</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -23,5 +23,17 @@
             <version>8.0.13</version>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>9</source>
+                    <target>9</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <name>JDBCTComplexExampleStarter</name>
 </project>
