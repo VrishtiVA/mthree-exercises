@@ -12,7 +12,8 @@ import org.springframework.context.annotation.FilterType;
  */
 @Configuration
 @ComponentScan(
-    basePackages = "com.sg.jdbctcomplexexample",
+        //Works without
+//    basePackages = "com.sg.jdbctcomplexexample",
     excludeFilters = @ComponentScan.Filter(
         type = FilterType.ASSIGNABLE_TYPE,
         value = CommandLineRunner.class
