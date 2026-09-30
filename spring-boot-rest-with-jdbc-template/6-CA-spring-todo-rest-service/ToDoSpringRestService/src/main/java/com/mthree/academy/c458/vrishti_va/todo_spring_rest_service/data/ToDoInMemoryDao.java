@@ -6,7 +6,8 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
+//Removed repository annotation from here so spring DI doesn't get confused.
+//Prevent ambiguity
 public class ToDoInMemoryDao implements ToDoDao {
 
     private static final List<ToDo> todos = new ArrayList<>();
