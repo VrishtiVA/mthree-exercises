@@ -2,6 +2,7 @@ package com.mthree.academy.c458.vrishti_va.todo_spring_rest_service.data;
 
 import com.mthree.academy.c458.vrishti_va.todo_spring_rest_service.models.ToDo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -11,6 +12,7 @@ import java.sql.*;
 import java.util.List;
 
 @Repository
+@Profile("database")
 public class ToDoDatabaseDao implements ToDoDao {
 
     private final JdbcTemplate jdbcTemplate;

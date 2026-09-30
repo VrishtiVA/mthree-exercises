@@ -1,13 +1,14 @@
 package com.mthree.academy.c458.vrishti_va.todo_spring_rest_service.data;
 
 import com.mthree.academy.c458.vrishti_va.todo_spring_rest_service.models.ToDo;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-//Removed repository annotation from here so spring DI doesn't get confused.
-//Prevent ambiguity
+@Repository
+@Profile("memory")
 public class ToDoInMemoryDao implements ToDoDao {
 
     private static final List<ToDo> todos = new ArrayList<>();
