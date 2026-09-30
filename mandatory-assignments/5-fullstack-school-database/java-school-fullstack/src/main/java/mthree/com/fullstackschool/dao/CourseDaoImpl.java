@@ -2,9 +2,12 @@ package mthree.com.fullstackschool.dao;
 
 import mthree.com.fullstackschool.dao.mappers.CourseMapper;
 import mthree.com.fullstackschool.model.Course;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
+
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
@@ -22,8 +25,33 @@ public class CourseDaoImpl implements CourseDao {
     public Course createNewCourse(Course course) {
         //YOUR CODE STARTS HERE
 
+        final String INSERT_COURSE = """
+            INSERT INTO course (courseCode, courseDesc, teacherId) 
+            VALUES (?, ?, ?)
+        """;
+        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
 
-        return null;
+        //Perform insertion update according to prepared statement,
+        //obtaining the generated id in the keyholder.
+        jdbcTemplate.update((Connection conn) -> {
+
+            //Prepare statement
+            PreparedStatement preparedStatement = conn.prepareStatement(
+                INSERT_COURSE,
+                Statement.RETURN_GENERATED_KEYS
+            );
+            preparedStatement.setString(1, course.getCourseName());
+            preparedStatement.setString(2, course.getCourseDesc());
+            preparedStatement.setInt(3, course.getTeacherId());
+            return preparedStatement;
+
+        }, keyHolder);
+
+        //Complete course object with newly generated id
+        course.setCourseId(keyHolder.getKey().intValue());
+
+        //Return added course
+        return course;
 
         //YOUR CODE ENDS HERE
     }
@@ -32,8 +60,9 @@ public class CourseDaoImpl implements CourseDao {
     public List<Course> getAllCourses() {
         //YOUR CODE STARTS HERE
 
-
-        return null;
+        //Set up, fetch, and return query results
+        final String SELECT_ALL_COURSES = "SELECT * FROM course";
+        return jdbcTemplate.query(SELECT_ALL_COURSES, new CourseMapper());
 
         //YOUR CODE ENDS HERE
     }
@@ -42,7 +71,15 @@ public class CourseDaoImpl implements CourseDao {
     public Course findCourseById(int id) {
         //YOUR CODE STARTS HERE
 
-        return null;
+        try {
+            //Set up, fetch, and return query results
+            final String SELECT_COURSE_BY_ID = "SELECT * FROM course WHERE cid = ?";
+            return jdbcTemplate.queryForObject(SELECT_COURSE_BY_ID, new CourseMapper(), id);
+
+        } catch (DataAccessException ex) {
+            //Return null to indicate could not find the object
+            return null;
+        }
 
         //YOUR CODE ENDS HERE
     }
@@ -51,7 +88,23 @@ public class CourseDaoImpl implements CourseDao {
     public void updateCourse(Course course) {
         //YOUR CODE STARTS HERE
 
+        //Set up update statement
+        final String UPDATE_COURSE = """
+            UPDATE course
+            SET
+                courseCode = ?,
+                courseDesc = ?,
+                teacherId = ?
+            WHERE cid = ?
+        """;
 
+        //Apply update
+        jdbcTemplate.update(UPDATE_COURSE,
+            course.getCourseName(),
+            course.getCourseDesc(),
+            course.getTeacherId(),
+            course.getCourseId()
+        );
 
         //YOUR CODE ENDS HERE
     }
@@ -60,7 +113,15 @@ public class CourseDaoImpl implements CourseDao {
     public void deleteCourse(int id) {
         //YOUR CODE STARTS HERE
 
+        //Delete course_student relations first (by course id)
+        deleteAllStudentsFromCourse(id);
 
+        //Then delete course itself
+        final String DELETE_COURSE = """
+            DELETE FROM course
+            WHERE cid = ?
+        """;
+        jdbcTemplate.update(DELETE_COURSE, id);
 
         //YOUR CODE ENDS HERE
     }
@@ -69,7 +130,12 @@ public class CourseDaoImpl implements CourseDao {
     public void deleteAllStudentsFromCourse(int courseId) {
         //YOUR CODE STARTS HERE
 
-
+        //Delete all course student relations
+        final String DELETE_COURSE_STUDENTS_BY_COURSE = """
+            DELETE FROM course_student
+            WHERE course_id = ?
+        """;
+        jdbcTemplate.update(DELETE_COURSE_STUDENTS_BY_COURSE, courseId);
 
         //YOUR CODE ENDS HERE
     }

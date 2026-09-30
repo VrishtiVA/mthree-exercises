@@ -2,10 +2,12 @@ package mthree.com.fullstackschool.dao;
 
 import mthree.com.fullstackschool.dao.mappers.TeacherMapper;
 import mthree.com.fullstackschool.model.Teacher;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
@@ -23,7 +25,33 @@ public class TeacherDaoImpl implements TeacherDao {
     public Teacher createNewTeacher(Teacher teacher) {
         //YOUR CODE STARTS HERE
 
-        return null;
+        final String INSERT_TEACHER = """
+            INSERT INTO teacher (tFName, tLName, dept)
+            VALUES (?, ?, ?)
+        """;
+        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+
+        //Perform insertion update according to prepared statement,
+        //obtaining the generated id in the keyholder.
+        jdbcTemplate.update((Connection conn) -> {
+
+            //Prepare statement
+            PreparedStatement preparedStatement = conn.prepareStatement(
+                    INSERT_TEACHER,
+                    Statement.RETURN_GENERATED_KEYS
+            );
+            preparedStatement.setString(1, teacher.getTeacherFName());
+            preparedStatement.setString(2, teacher.getTeacherLName());
+            preparedStatement.setString(3, teacher.getDept());
+            return preparedStatement;
+
+        }, keyHolder);
+
+        //Complete teacher object with newly generated id
+        teacher.setTeacherId(keyHolder.getKey().intValue());
+
+        //Return added teacher
+        return teacher;
 
         //YOUR CODE ENDS HERE
     }
@@ -32,7 +60,9 @@ public class TeacherDaoImpl implements TeacherDao {
     public List<Teacher> getAllTeachers() {
         //YOUR CODE STARTS HERE
 
-        return null;
+        //Set up, fetch, and return query results
+        final String SELECT_ALL_TEACHERS = "SELECT * FROM teacher";
+        return jdbcTemplate.query(SELECT_ALL_TEACHERS, new TeacherMapper());
 
         //YOUR CODE ENDS HERE
     }
@@ -41,7 +71,15 @@ public class TeacherDaoImpl implements TeacherDao {
     public Teacher findTeacherById(int id) {
         //YOUR CODE STARTS HERE
 
-        return null;
+        try {
+            //Set up, fetch, and return query results
+            final String SELECT_TEACHER_BY_ID = "SELECT * FROM teacher WHERE tid = ?";
+            return jdbcTemplate.queryForObject(SELECT_TEACHER_BY_ID, new TeacherMapper(), id);
+
+        } catch (DataAccessException ex) {
+            //Return null to indicate could not find the object
+            return null;
+        }
 
         //YOUR CODE ENDS HERE
     }
@@ -50,6 +88,23 @@ public class TeacherDaoImpl implements TeacherDao {
     public void updateTeacher(Teacher t) {
         //YOUR CODE STARTS HERE
 
+        //Set up update statement
+        final String UPDATE_TEACHER = """
+            UPDATE teacher
+            SET
+                tFName = ?,
+                tLName = ?,
+                dept = ?
+            WHERE tid = ?
+        """;
+
+        //Apply update
+        jdbcTemplate.update(UPDATE_TEACHER,
+            t.getTeacherFName(),
+            t.getTeacherLName(),
+            t.getDept(),
+            t.getTeacherId()
+        );
 
         //YOUR CODE ENDS HERE
     }
@@ -58,6 +113,20 @@ public class TeacherDaoImpl implements TeacherDao {
     public void deleteTeacher(int id) {
         //YOUR CODE STARTS HERE
 
+        //Null related course teacher ids first
+        final String DETACH_TEACHER_COURSES = """
+            UPDATE course SET
+                teacherId = null
+            WHERE teacherId = ?
+        """;
+        jdbcTemplate.update(DETACH_TEACHER_COURSES, id);
+
+        //Delete teachers themselves
+        final String DELETE_TEACHER = """
+            DELETE FROM teacher
+            WHERE tid = ?
+        """;
+        jdbcTemplate.update(DELETE_TEACHER, id);
 
         //YOUR CODE ENDS HERE
     }
