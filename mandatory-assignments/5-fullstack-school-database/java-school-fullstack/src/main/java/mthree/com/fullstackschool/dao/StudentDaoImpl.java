@@ -3,17 +3,15 @@ package mthree.com.fullstackschool.dao;
 import mthree.com.fullstackschool.dao.mappers.StudentMapper;
 import mthree.com.fullstackschool.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 
 import java.sql.*;
 import java.util.List;
-import java.util.Objects;
 
 @Repository
 public class StudentDaoImpl implements StudentDao {
@@ -130,12 +128,39 @@ public class StudentDaoImpl implements StudentDao {
     public void addStudentToCourse(int studentId, int courseId) {
         //YOUR CODE STARTS HERE
 
-        //Set up insert statement, and perform insertion update.
-        final String INSERT_COURSE_STUDENT = """
-            INSERT INTO course_student (student_id, course_id)
-            VALUES (?, ?)
+        /* While course_student fields should be PK FK in the database, as shown in the ERD, they aren't,
+           so no referential integrity exception is thrown by itself and duplicates could be added.
+           Hence, need to check first that relation doesn't exist, otherwise indicate e.g. by throwing,
+           without updating signature outside of placeholder (to fit requirements)
+           to prevent adding duplicates (as requested).
+           SQL CASE statement syntax refresher: https://www.w3schools.com/sql/sql_case.asp
+        */
+
+        //Check student isn't already enrolled on course
+        final String SELECT_COURSE_STUDENT = """
+            SELECT 
+                CASE
+                    WHEN COUNT(*) = 0 THEN 1
+                    ELSE 0
+                END
+            FROM course_student
+            WHERE student_id = ? AND course_id = ?
         """;
-        jdbcTemplate.update(INSERT_COURSE_STUDENT, studentId, courseId);
+        Boolean nonDuplicate = jdbcTemplate.queryForObject(SELECT_COURSE_STUDENT, Boolean.class, studentId, courseId);
+
+        //If student hasn't been enrolled yet, can enroll.
+        if (nonDuplicate) {
+            //Set up insert statement, and perform insertion update.
+            final String INSERT_COURSE_STUDENT = """
+                INSERT INTO course_student (student_id, course_id)
+                VALUES (?, ?)
+            """;
+            jdbcTemplate.update(INSERT_COURSE_STUDENT, studentId, courseId);
+
+        } else {
+            //The course_student relation already exists
+            throw new DataIntegrityViolationException("Student already added to course.");
+        }
 
         //YOUR CODE ENDS HERE
     }
@@ -147,7 +172,7 @@ public class StudentDaoImpl implements StudentDao {
         //Set up statement to delete specific course_student
         final String DELETE_COURSE_STUDENT = """
             DELETE FROM course_student
-            WHERE studentId = ? AND courseId = ?
+            WHERE student_id = ? AND course_id = ?
         """;
 
         //Perform the deletion update.
