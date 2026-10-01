@@ -75,15 +75,9 @@ public class StudentDaoImpl implements StudentDao {
     public Student findStudentById(int id) {
         //YOUR CODE STARTS HERE
 
-        try {
-            //Set up, fetch, and return query results
-            final String SELECT_STUDENT_BY_ID = "SELECT * FROM student WHERE sid = ?";
-            return jdbcTemplate.queryForObject(SELECT_STUDENT_BY_ID, new StudentMapper(), id);
-
-        } catch (DataAccessException ex) {
-            //Return null to indicate could not find the object
-            return null;
-        }
+        //Set up, fetch, and return query result
+        final String SELECT_STUDENT_BY_ID = "SELECT * FROM student WHERE sid = ?";
+        return jdbcTemplate.queryForObject(SELECT_STUDENT_BY_ID, new StudentMapper(), id);
 
         //YOUR CODE ENDS HERE
     }
@@ -150,10 +144,13 @@ public class StudentDaoImpl implements StudentDao {
     public void deleteStudentFromCourse(int studentId, int courseId) {
         //YOUR CODE STARTS HERE
 
+        //Set up statement to delete specific course_student
         final String DELETE_COURSE_STUDENT = """
             DELETE FROM course_student
             WHERE studentId = ? AND courseId = ?
         """;
+
+        //Perform the deletion update.
         jdbcTemplate.update(DELETE_COURSE_STUDENT, studentId, courseId);
 
         //YOUR CODE ENDS HERE

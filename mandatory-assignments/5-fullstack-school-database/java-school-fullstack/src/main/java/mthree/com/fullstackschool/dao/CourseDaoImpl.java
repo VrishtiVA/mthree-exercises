@@ -2,7 +2,6 @@ package mthree.com.fullstackschool.dao;
 
 import mthree.com.fullstackschool.dao.mappers.CourseMapper;
 import mthree.com.fullstackschool.model.Course;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
@@ -71,15 +70,9 @@ public class CourseDaoImpl implements CourseDao {
     public Course findCourseById(int id) {
         //YOUR CODE STARTS HERE
 
-        try {
-            //Set up, fetch, and return query results
-            final String SELECT_COURSE_BY_ID = "SELECT * FROM course WHERE cid = ?";
-            return jdbcTemplate.queryForObject(SELECT_COURSE_BY_ID, new CourseMapper(), id);
-
-        } catch (DataAccessException ex) {
-            //Return null to indicate could not find the object
-            return null;
-        }
+        //Set up, fetch, and return query result
+        final String SELECT_COURSE_BY_ID = "SELECT * FROM course WHERE cid = ?";
+        return jdbcTemplate.queryForObject(SELECT_COURSE_BY_ID, new CourseMapper(), id);
 
         //YOUR CODE ENDS HERE
     }

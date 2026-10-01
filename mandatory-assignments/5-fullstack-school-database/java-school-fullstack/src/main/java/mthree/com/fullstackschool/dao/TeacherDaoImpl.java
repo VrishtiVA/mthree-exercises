@@ -2,7 +2,6 @@ package mthree.com.fullstackschool.dao;
 
 import mthree.com.fullstackschool.dao.mappers.TeacherMapper;
 import mthree.com.fullstackschool.model.Teacher;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
@@ -71,15 +70,9 @@ public class TeacherDaoImpl implements TeacherDao {
     public Teacher findTeacherById(int id) {
         //YOUR CODE STARTS HERE
 
-        try {
-            //Set up, fetch, and return query results
-            final String SELECT_TEACHER_BY_ID = "SELECT * FROM teacher WHERE tid = ?";
-            return jdbcTemplate.queryForObject(SELECT_TEACHER_BY_ID, new TeacherMapper(), id);
-
-        } catch (DataAccessException ex) {
-            //Return null to indicate could not find the object
-            return null;
-        }
+        //Set up, fetch, and return query result
+        final String SELECT_TEACHER_BY_ID = "SELECT * FROM teacher WHERE tid = ?";
+        return jdbcTemplate.queryForObject(SELECT_TEACHER_BY_ID, new TeacherMapper(), id);
 
         //YOUR CODE ENDS HERE
     }
